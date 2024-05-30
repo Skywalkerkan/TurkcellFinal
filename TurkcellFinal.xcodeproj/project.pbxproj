@@ -1,0 +1,629 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DEB3CF9B2C08D7B900002729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */; };
+		DEB3CF9D2C08D7B900002729 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */; };
+		DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9E2C08D7B900002729 /* ViewController.swift */; };
+		DEB3CFA22C08D7B900002729 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEB3CFA12C08D7B900002729 /* Base */; };
+		DEB3CFA52C08D7B900002729 /* TurkcellFinal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFA32C08D7B900002729 /* TurkcellFinal.xcdatamodeld */; };
+		DEB3CFA72C08D7BB00002729 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEB3CFA62C08D7BB00002729 /* Assets.xcassets */; };
+		DEB3CFAA2C08D7BB00002729 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = DEB3CFA92C08D7BB00002729 /* Base */; };
+		DEB3CFB52C08D7BB00002729 /* TurkcellFinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFB42C08D7BB00002729 /* TurkcellFinalTests.swift */; };
+		DEB3CFBF2C08D7BB00002729 /* TurkcellFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFBE2C08D7BB00002729 /* TurkcellFinalUITests.swift */; };
+		DEB3CFC12C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFC02C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DEB3CFB12C08D7BB00002729 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DEB3CF8F2C08D7B900002729 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEB3CF962C08D7B900002729;
+			remoteInfo = TurkcellFinal;
+		};
+		DEB3CFBB2C08D7BB00002729 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DEB3CF8F2C08D7B900002729 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEB3CF962C08D7B900002729;
+			remoteInfo = TurkcellFinal;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DEB3CF972C08D7B900002729 /* TurkcellFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurkcellFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DEB3CF9E2C08D7B900002729 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DEB3CFA12C08D7B900002729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DEB3CFA42C08D7B900002729 /* TurkcellFinal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TurkcellFinal.xcdatamodel; sourceTree = "<group>"; };
+		DEB3CFA62C08D7BB00002729 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DEB3CFA92C08D7BB00002729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DEB3CFAB2C08D7BB00002729 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEB3CFB02C08D7BB00002729 /* TurkcellFinalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurkcellFinalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEB3CFB42C08D7BB00002729 /* TurkcellFinalTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellFinalTests.swift; sourceTree = "<group>"; };
+		DEB3CFBA2C08D7BB00002729 /* TurkcellFinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurkcellFinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEB3CFBE2C08D7BB00002729 /* TurkcellFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellFinalUITests.swift; sourceTree = "<group>"; };
+		DEB3CFC02C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DEB3CF942C08D7B900002729 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB3CFAD2C08D7BB00002729 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB3CFB72C08D7BB00002729 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DEB3CF8E2C08D7B900002729 = {
+			isa = PBXGroup;
+			children = (
+				DEB3CF992C08D7B900002729 /* TurkcellFinal */,
+				DEB3CFB32C08D7BB00002729 /* TurkcellFinalTests */,
+				DEB3CFBD2C08D7BB00002729 /* TurkcellFinalUITests */,
+				DEB3CF982C08D7B900002729 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DEB3CF982C08D7B900002729 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3CF972C08D7B900002729 /* TurkcellFinal.app */,
+				DEB3CFB02C08D7BB00002729 /* TurkcellFinalTests.xctest */,
+				DEB3CFBA2C08D7BB00002729 /* TurkcellFinalUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DEB3CF992C08D7B900002729 /* TurkcellFinal */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */,
+				DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */,
+				DEB3CF9E2C08D7B900002729 /* ViewController.swift */,
+				DEB3CFA02C08D7B900002729 /* Main.storyboard */,
+				DEB3CFA62C08D7BB00002729 /* Assets.xcassets */,
+				DEB3CFA82C08D7BB00002729 /* LaunchScreen.storyboard */,
+				DEB3CFAB2C08D7BB00002729 /* Info.plist */,
+				DEB3CFA32C08D7B900002729 /* TurkcellFinal.xcdatamodeld */,
+			);
+			path = TurkcellFinal;
+			sourceTree = "<group>";
+		};
+		DEB3CFB32C08D7BB00002729 /* TurkcellFinalTests */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3CFB42C08D7BB00002729 /* TurkcellFinalTests.swift */,
+			);
+			path = TurkcellFinalTests;
+			sourceTree = "<group>";
+		};
+		DEB3CFBD2C08D7BB00002729 /* TurkcellFinalUITests */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3CFBE2C08D7BB00002729 /* TurkcellFinalUITests.swift */,
+				DEB3CFC02C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift */,
+			);
+			path = TurkcellFinalUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DEB3CF962C08D7B900002729 /* TurkcellFinal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEB3CFC42C08D7BB00002729 /* Build configuration list for PBXNativeTarget "TurkcellFinal" */;
+			buildPhases = (
+				DEB3CF932C08D7B900002729 /* Sources */,
+				DEB3CF942C08D7B900002729 /* Frameworks */,
+				DEB3CF952C08D7B900002729 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TurkcellFinal;
+			productName = TurkcellFinal;
+			productReference = DEB3CF972C08D7B900002729 /* TurkcellFinal.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DEB3CFAF2C08D7BB00002729 /* TurkcellFinalTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEB3CFC72C08D7BB00002729 /* Build configuration list for PBXNativeTarget "TurkcellFinalTests" */;
+			buildPhases = (
+				DEB3CFAC2C08D7BB00002729 /* Sources */,
+				DEB3CFAD2C08D7BB00002729 /* Frameworks */,
+				DEB3CFAE2C08D7BB00002729 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEB3CFB22C08D7BB00002729 /* PBXTargetDependency */,
+			);
+			name = TurkcellFinalTests;
+			productName = TurkcellFinalTests;
+			productReference = DEB3CFB02C08D7BB00002729 /* TurkcellFinalTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		DEB3CFB92C08D7BB00002729 /* TurkcellFinalUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEB3CFCA2C08D7BB00002729 /* Build configuration list for PBXNativeTarget "TurkcellFinalUITests" */;
+			buildPhases = (
+				DEB3CFB62C08D7BB00002729 /* Sources */,
+				DEB3CFB72C08D7BB00002729 /* Frameworks */,
+				DEB3CFB82C08D7BB00002729 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEB3CFBC2C08D7BB00002729 /* PBXTargetDependency */,
+			);
+			name = TurkcellFinalUITests;
+			productName = TurkcellFinalUITests;
+			productReference = DEB3CFBA2C08D7BB00002729 /* TurkcellFinalUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DEB3CF8F2C08D7B900002729 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					DEB3CF962C08D7B900002729 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					DEB3CFAF2C08D7BB00002729 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = DEB3CF962C08D7B900002729;
+					};
+					DEB3CFB92C08D7BB00002729 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = DEB3CF962C08D7B900002729;
+					};
+				};
+			};
+			buildConfigurationList = DEB3CF922C08D7B900002729 /* Build configuration list for PBXProject "TurkcellFinal" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DEB3CF8E2C08D7B900002729;
+			productRefGroup = DEB3CF982C08D7B900002729 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DEB3CF962C08D7B900002729 /* TurkcellFinal */,
+				DEB3CFAF2C08D7BB00002729 /* TurkcellFinalTests */,
+				DEB3CFB92C08D7BB00002729 /* TurkcellFinalUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DEB3CF952C08D7B900002729 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB3CFA72C08D7BB00002729 /* Assets.xcassets in Resources */,
+				DEB3CFAA2C08D7BB00002729 /* Base in Resources */,
+				DEB3CFA22C08D7B900002729 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB3CFAE2C08D7BB00002729 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB3CFB82C08D7BB00002729 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DEB3CF932C08D7B900002729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */,
+				DEB3CF9B2C08D7B900002729 /* AppDelegate.swift in Sources */,
+				DEB3CFA52C08D7B900002729 /* TurkcellFinal.xcdatamodeld in Sources */,
+				DEB3CF9D2C08D7B900002729 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB3CFAC2C08D7BB00002729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB3CFB52C08D7BB00002729 /* TurkcellFinalTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB3CFB62C08D7BB00002729 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB3CFBF2C08D7BB00002729 /* TurkcellFinalUITests.swift in Sources */,
+				DEB3CFC12C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DEB3CFB22C08D7BB00002729 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEB3CF962C08D7B900002729 /* TurkcellFinal */;
+			targetProxy = DEB3CFB12C08D7BB00002729 /* PBXContainerItemProxy */;
+		};
+		DEB3CFBC2C08D7BB00002729 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEB3CF962C08D7B900002729 /* TurkcellFinal */;
+			targetProxy = DEB3CFBB2C08D7BB00002729 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DEB3CFA02C08D7B900002729 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEB3CFA12C08D7B900002729 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DEB3CFA82C08D7BB00002729 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEB3CFA92C08D7BB00002729 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DEB3CFC22C08D7BB00002729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DEB3CFC32C08D7BB00002729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DEB3CFC52C08D7BB00002729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZY98G8GQD4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TurkcellFinal/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.erkancosar.TurkcellFinal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DEB3CFC62C08D7BB00002729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZY98G8GQD4;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TurkcellFinal/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.erkancosar.TurkcellFinal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DEB3CFC82C08D7BB00002729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZY98G8GQD4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.erkancosar.TurkcellFinalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TurkcellFinal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TurkcellFinal";
+			};
+			name = Debug;
+		};
+		DEB3CFC92C08D7BB00002729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZY98G8GQD4;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.erkancosar.TurkcellFinalTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TurkcellFinal.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TurkcellFinal";
+			};
+			name = Release;
+		};
+		DEB3CFCB2C08D7BB00002729 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZY98G8GQD4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.erkancosar.TurkcellFinalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TurkcellFinal;
+			};
+			name = Debug;
+		};
+		DEB3CFCC2C08D7BB00002729 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZY98G8GQD4;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.erkancosar.TurkcellFinalUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TurkcellFinal;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DEB3CF922C08D7B900002729 /* Build configuration list for PBXProject "TurkcellFinal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEB3CFC22C08D7BB00002729 /* Debug */,
+				DEB3CFC32C08D7BB00002729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEB3CFC42C08D7BB00002729 /* Build configuration list for PBXNativeTarget "TurkcellFinal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEB3CFC52C08D7BB00002729 /* Debug */,
+				DEB3CFC62C08D7BB00002729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEB3CFC72C08D7BB00002729 /* Build configuration list for PBXNativeTarget "TurkcellFinalTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEB3CFC82C08D7BB00002729 /* Debug */,
+				DEB3CFC92C08D7BB00002729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEB3CFCA2C08D7BB00002729 /* Build configuration list for PBXNativeTarget "TurkcellFinalUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEB3CFCB2C08D7BB00002729 /* Debug */,
+				DEB3CFCC2C08D7BB00002729 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		DEB3CFA32C08D7B900002729 /* TurkcellFinal.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DEB3CFA42C08D7B900002729 /* TurkcellFinal.xcdatamodel */,
+			);
+			currentVersion = DEB3CFA42C08D7B900002729 /* TurkcellFinal.xcdatamodel */;
+			path = TurkcellFinal.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DEB3CF8F2C08D7B900002729 /* Project object */;
+}

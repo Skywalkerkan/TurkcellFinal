@@ -34,19 +34,15 @@ class InfoCell: UITableViewCell {
     let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.backgroundColor = .red
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     let exampleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Labelcık"
         label.textColor = .black
         label.numberOfLines = 0
         label.textAlignment = .left
-        label.isHidden = true
-        label.backgroundColor = .red
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

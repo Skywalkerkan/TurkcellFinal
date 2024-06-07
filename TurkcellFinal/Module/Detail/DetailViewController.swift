@@ -26,7 +26,6 @@ final class DetailViewController: BaseViewController {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.backgroundColor = .red
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -49,7 +48,7 @@ final class DetailViewController: BaseViewController {
     
     private let tableView: SelfSizingTableView = {
         let tableView = SelfSizingTableView()
-        tableView.backgroundColor = .red
+        tableView.backgroundColor = .systemGray6
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -175,6 +174,17 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         return UICollectionViewCell()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch collectionView {
+        case meaningsCollectionView:
+            presenter.partOfSpeechDidSelect(source: source)
+        case synonymCollectionView:
+            break
+        default:
+            break
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
@@ -183,22 +193,28 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return source?.first?.meanings?.count ?? 0
+      //  return source?.first?.meanings?.count ?? 0
+        return presenter.numberOfSection(source: source)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return source?.first?.meanings?[section].definitions?.count ?? 0
+       // return source?.first?.meanings?[section].definitions?.count ?? 0
+        return presenter.numberOfRowsInSection(source: source, section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as! InfoCell
         if let meaning = source?.first?.meanings?[indexPath.section] {
             let partOfSpeech = meaning.partOfSpeech
-            cell.partOfSpeechLabel.text = "\(indexPath.row + 1)" + (partOfSpeech ?? "")
+            cell.partOfSpeechLabel.text = "\(indexPath.row + 1) " + (partOfSpeech ?? "")
         }
         
         if let definitions = source?.first?.meanings?[indexPath.section].definitions {
             cell.definitionLabel.text = definitions[indexPath.row].definition
+        }
+        
+        if let definitions = source?.first?.meanings?[indexPath.section].definitions, let example = definitions[indexPath.row].example {
+            cell.exampleLabel.text = "Example: " + example
         }
 
         return cell

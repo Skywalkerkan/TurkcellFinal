@@ -9,8 +9,14 @@ import Foundation
 
 protocol DetailPresenterProtocol {
     func viewDidload(word: String?)
-    func partOfSpeechDidSelect()
+    func partOfSpeechDidSelect(source: [WordResult]?)
     var allSynonyms: [Synonym]? { get }
+    
+    func numberOfSection(source: [WordResult]?) -> Int
+    func numberOfRowsInSection(source: [WordResult]?, section: Int) -> Int
+
+  //  func cellForRowAt(index: Int) -> Meaning?
+    
 }
 
 final class DetailPresenter {
@@ -31,16 +37,39 @@ final class DetailPresenter {
 
 extension DetailPresenter: DetailPresenterProtocol {
     
+    func numberOfRowsInSection(source: [WordResult]?, section: Int) -> Int {
+        // source?.first?.meanings?[section].definitions?.count ?? 0
+        if let definitionsCount = source?.first?.meanings?[section].definitions?.count {
+            return definitionsCount
+        } else {
+            return 0
+        }
+    }
+    
+    
+    func numberOfSection(source: [WordResult]?) -> Int {
+        if let meaningCount = source?.first?.meanings?.count {
+            return meaningCount
+        } else {
+            return 0
+        }
+        
+    }
+    
+    /*func cellForRowAt(index: Int) -> Meaning? {
+        return Meaning(from: <#any Decoder#>)
+    }*/
+    
     
     func viewDidload(word: String?) {
         view.setupTableView()
         view.setupCollectionViews()
         interactor.fetchSynonms(word: word)
-        view.reloadData()
+       // view.reloadData()
     }
     
-    func partOfSpeechDidSelect() {
-        
+    func partOfSpeechDidSelect(source: [WordResult]?) {
+        print(source?.first?.meanings?.count)
     }
     
     var allSynonyms: [Synonym]? {
@@ -57,7 +86,7 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
             self.synonyms = synonyms
             print("okey")
             print(self.synonyms)
-           // view.reloadData()
+            view.reloadData()
         case .failure(let error):
             print("hata alıyom")
         }

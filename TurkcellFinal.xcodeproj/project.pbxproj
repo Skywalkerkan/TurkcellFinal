@@ -7,6 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE294F5A2C0F4484004C4531 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F592C0F4484004C4531 /* LaunchViewController.swift */; };
+		DE294F5C2C0F448E004C4531 /* LaunchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F5B2C0F448E004C4531 /* LaunchInteractor.swift */; };
+		DE294F5E2C0F4886004C4531 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F5D2C0F4886004C4531 /* LaunchPresenter.swift */; };
+		DE294F612C0F48B8004C4531 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F602C0F48B8004C4531 /* LaunchRouter.swift */; };
+		DE294F642C0F49A4004C4531 /* LaunchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F632C0F49A4004C4531 /* LaunchCell.swift */; };
+		DE52A7F62C111BFD00ADF618 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A7F52C111BFD00ADF618 /* HomeViewController.swift */; };
+		DE52A7F82C111C0A00ADF618 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A7F72C111C0A00ADF618 /* HomePresenter.swift */; };
+		DE52A7FB2C111C3300ADF618 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A7FA2C111C3300ADF618 /* HomeInteractor.swift */; };
+		DE52A7FD2C111C3900ADF618 /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A7FC2C111C3900ADF618 /* HomeRouter.swift */; };
+		DE52A7FF2C111C5000ADF618 /* HomeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A7FE2C111C5000ADF618 /* HomeEntity.swift */; };
+		DE52A8032C1120F900ADF618 /* SearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8022C1120F900ADF618 /* SearchRepository.swift */; };
+		DE52A8062C112B8800ADF618 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8052C112B8800ADF618 /* SearchCell.swift */; };
+		DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8082C11373B00ADF618 /* ServiceManager.swift */; };
+		DE52A80C2C11376100ADF618 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A80B2C11376100ADF618 /* Word.swift */; };
+		DEA1BB2C2C120B6D0025FFD6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB2B2C120B6D0025FFD6 /* BaseViewController.swift */; };
+		DEA1BB302C120BB40025FFD6 /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB2F2C120BB40025FFD6 /* LoadingShowable.swift */; };
+		DEA1BB332C120BED0025FFD6 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB322C120BED0025FFD6 /* LoadingView.swift */; };
+		DEA1BB352C1224A70025FFD6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB342C1224A70025FFD6 /* DetailViewController.swift */; };
+		DEA1BB372C1224B30025FFD6 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB362C1224B30025FFD6 /* DetailInteractor.swift */; };
+		DEA1BB392C1224BD0025FFD6 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB382C1224BD0025FFD6 /* DetailPresenter.swift */; };
+		DEA1BB3B2C1224C60025FFD6 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB3A2C1224C60025FFD6 /* DetailRouter.swift */; };
+		DEA1BB3D2C123E590025FFD6 /* Synonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB3C2C123E590025FFD6 /* Synonym.swift */; };
 		DEB3CF9B2C08D7B900002729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */; };
 		DEB3CF9D2C08D7B900002729 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */; };
 		DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9E2C08D7B900002729 /* ViewController.swift */; };
@@ -17,6 +39,13 @@
 		DEB3CFB52C08D7BB00002729 /* TurkcellFinalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFB42C08D7BB00002729 /* TurkcellFinalTests.swift */; };
 		DEB3CFBF2C08D7BB00002729 /* TurkcellFinalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFBE2C08D7BB00002729 /* TurkcellFinalUITests.swift */; };
 		DEB3CFC12C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFC02C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift */; };
+		DEB3CFD32C08DD9300002729 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFD22C08DD9300002729 /* SplashViewController.swift */; };
+		DEB3CFD52C08DDA700002729 /* SplashRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFD42C08DDA700002729 /* SplashRouter.swift */; };
+		DEB3CFD82C08DDB600002729 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFD72C08DDB600002729 /* SplashPresenter.swift */; };
+		DEB3CFDA2C08DDC400002729 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFD92C08DDC400002729 /* SplashInteractor.swift */; };
+		DEB3CFDC2C08DFEC00002729 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFDB2C08DFEC00002729 /* Reachability.swift */; };
+		DEB3CFDE2C08E13700002729 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFDD2C08E13700002729 /* NetworkManager.swift */; };
+		DEB3CFE02C08E4B600002729 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CFDF2C08E4B600002729 /* API.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +66,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE294F592C0F4484004C4531 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		DE294F5B2C0F448E004C4531 /* LaunchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInteractor.swift; sourceTree = "<group>"; };
+		DE294F5D2C0F4886004C4531 /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
+		DE294F602C0F48B8004C4531 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
+		DE294F632C0F49A4004C4531 /* LaunchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCell.swift; sourceTree = "<group>"; };
+		DE52A7F52C111BFD00ADF618 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DE52A7F72C111C0A00ADF618 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		DE52A7FA2C111C3300ADF618 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		DE52A7FC2C111C3900ADF618 /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		DE52A7FE2C111C5000ADF618 /* HomeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeEntity.swift; sourceTree = "<group>"; };
+		DE52A8022C1120F900ADF618 /* SearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepository.swift; sourceTree = "<group>"; };
+		DE52A8052C112B8800ADF618 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
+		DE52A8082C11373B00ADF618 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		DE52A80B2C11376100ADF618 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		DEA1BB2B2C120B6D0025FFD6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		DEA1BB2F2C120BB40025FFD6 /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
+		DEA1BB322C120BED0025FFD6 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		DEA1BB342C1224A70025FFD6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		DEA1BB362C1224B30025FFD6 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
+		DEA1BB382C1224BD0025FFD6 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		DEA1BB3A2C1224C60025FFD6 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
+		DEA1BB3C2C123E590025FFD6 /* Synonym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synonym.swift; sourceTree = "<group>"; };
 		DEB3CF972C08D7B900002729 /* TurkcellFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurkcellFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +102,13 @@
 		DEB3CFBA2C08D7BB00002729 /* TurkcellFinalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TurkcellFinalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEB3CFBE2C08D7BB00002729 /* TurkcellFinalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellFinalUITests.swift; sourceTree = "<group>"; };
 		DEB3CFC02C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurkcellFinalUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DEB3CFD22C08DD9300002729 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		DEB3CFD42C08DDA700002729 /* SplashRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRouter.swift; sourceTree = "<group>"; };
+		DEB3CFD72C08DDB600002729 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		DEB3CFD92C08DDC400002729 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
+		DEB3CFDB2C08DFEC00002729 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		DEB3CFDD2C08E13700002729 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DEB3CFDF2C08E4B600002729 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +136,107 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE294F582C0F443F004C4531 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				DE294F622C0F498D004C4531 /* LaunchCell */,
+				DE294F592C0F4484004C4531 /* LaunchViewController.swift */,
+				DE294F5B2C0F448E004C4531 /* LaunchInteractor.swift */,
+				DE294F5D2C0F4886004C4531 /* LaunchPresenter.swift */,
+				DE294F602C0F48B8004C4531 /* LaunchRouter.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		DE294F622C0F498D004C4531 /* LaunchCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE294F632C0F49A4004C4531 /* LaunchCell.swift */,
+			);
+			path = LaunchCell;
+			sourceTree = "<group>";
+		};
+		DE52A7F42C111BEA00ADF618 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DE52A8042C112B6900ADF618 /* HomeCell */,
+				DE52A7F52C111BFD00ADF618 /* HomeViewController.swift */,
+				DE52A7F72C111C0A00ADF618 /* HomePresenter.swift */,
+				DE52A7FA2C111C3300ADF618 /* HomeInteractor.swift */,
+				DE52A7FC2C111C3900ADF618 /* HomeRouter.swift */,
+				DE52A7FE2C111C5000ADF618 /* HomeEntity.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DE52A8002C11204D00ADF618 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				DE52A8022C1120F900ADF618 /* SearchRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		DE52A8012C1120E600ADF618 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				DE52A8002C11204D00ADF618 /* Repository */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		DE52A8042C112B6900ADF618 /* HomeCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE52A8052C112B8800ADF618 /* SearchCell.swift */,
+			);
+			path = HomeCell;
+			sourceTree = "<group>";
+		};
+		DE52A80A2C11374E00ADF618 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				DE52A80B2C11376100ADF618 /* Word.swift */,
+				DEA1BB3C2C123E590025FFD6 /* Synonym.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		DE52A80D2C11390400ADF618 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1BB342C1224A70025FFD6 /* DetailViewController.swift */,
+				DEA1BB362C1224B30025FFD6 /* DetailInteractor.swift */,
+				DEA1BB382C1224BD0025FFD6 /* DetailPresenter.swift */,
+				DEA1BB3A2C1224C60025FFD6 /* DetailRouter.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		DEA1BB2A2C120B580025FFD6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1BB2B2C120B6D0025FFD6 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		DEA1BB2E2C120BA90025FFD6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1BB2F2C120BB40025FFD6 /* LoadingShowable.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		DEA1BB312C120BE70025FFD6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1BB322C120BED0025FFD6 /* LoadingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DEB3CF8E2C08D7B900002729 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +260,12 @@
 		DEB3CF992C08D7B900002729 /* TurkcellFinal */ = {
 			isa = PBXGroup;
 			children = (
+				DEB3CFCD2C08D8C600002729 /* Network */,
+				DE52A80A2C11374E00ADF618 /* Entities */,
+				DE52A8012C1120E600ADF618 /* CoreData */,
+				DEB3CFD02C08D8F700002729 /* Module */,
+				DEB3CFCF2C08D8DC00002729 /* Resources */,
+				DEB3CFCE2C08D8D800002729 /* App */,
 				DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */,
 				DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */,
 				DEB3CF9E2C08D7B900002729 /* ViewController.swift */,
@@ -128,6 +293,56 @@
 				DEB3CFC02C08D7BB00002729 /* TurkcellFinalUITestsLaunchTests.swift */,
 			);
 			path = TurkcellFinalUITests;
+			sourceTree = "<group>";
+		};
+		DEB3CFCD2C08D8C600002729 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3CFDB2C08DFEC00002729 /* Reachability.swift */,
+				DEB3CFDD2C08E13700002729 /* NetworkManager.swift */,
+				DEB3CFDF2C08E4B600002729 /* API.swift */,
+				DE52A8082C11373B00ADF618 /* ServiceManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		DEB3CFCE2C08D8D800002729 /* App */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DEB3CFCF2C08D8DC00002729 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1BB312C120BE70025FFD6 /* View */,
+				DEA1BB2E2C120BA90025FFD6 /* Utils */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DEB3CFD02C08D8F700002729 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				DEA1BB2A2C120B580025FFD6 /* Base */,
+				DE52A80D2C11390400ADF618 /* Detail */,
+				DE52A7F42C111BEA00ADF618 /* Home */,
+				DE294F582C0F443F004C4531 /* Launch */,
+				DEB3CFD12C08D8FD00002729 /* Splash */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		DEB3CFD12C08D8FD00002729 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				DEB3CFD22C08DD9300002729 /* SplashViewController.swift */,
+				DEB3CFD92C08DDC400002729 /* SplashInteractor.swift */,
+				DEB3CFD72C08DDB600002729 /* SplashPresenter.swift */,
+				DEB3CFD42C08DDA700002729 /* SplashRouter.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,10 +476,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB3CFE02C08E4B600002729 /* API.swift in Sources */,
+				DEA1BB3B2C1224C60025FFD6 /* DetailRouter.swift in Sources */,
+				DE52A7FB2C111C3300ADF618 /* HomeInteractor.swift in Sources */,
 				DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */,
+				DE294F5C2C0F448E004C4531 /* LaunchInteractor.swift in Sources */,
+				DE52A7F62C111BFD00ADF618 /* HomeViewController.swift in Sources */,
+				DEA1BB332C120BED0025FFD6 /* LoadingView.swift in Sources */,
+				DEB3CFD82C08DDB600002729 /* SplashPresenter.swift in Sources */,
+				DEB3CFDE2C08E13700002729 /* NetworkManager.swift in Sources */,
+				DE294F5E2C0F4886004C4531 /* LaunchPresenter.swift in Sources */,
+				DEA1BB352C1224A70025FFD6 /* DetailViewController.swift in Sources */,
+				DE294F642C0F49A4004C4531 /* LaunchCell.swift in Sources */,
+				DEA1BB302C120BB40025FFD6 /* LoadingShowable.swift in Sources */,
+				DE52A80C2C11376100ADF618 /* Word.swift in Sources */,
+				DE52A7FD2C111C3900ADF618 /* HomeRouter.swift in Sources */,
+				DEB3CFD52C08DDA700002729 /* SplashRouter.swift in Sources */,
+				DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */,
+				DEA1BB2C2C120B6D0025FFD6 /* BaseViewController.swift in Sources */,
 				DEB3CF9B2C08D7B900002729 /* AppDelegate.swift in Sources */,
 				DEB3CFA52C08D7B900002729 /* TurkcellFinal.xcdatamodeld in Sources */,
+				DEA1BB3D2C123E590025FFD6 /* Synonym.swift in Sources */,
+				DE52A8032C1120F900ADF618 /* SearchRepository.swift in Sources */,
+				DE294F5A2C0F4484004C4531 /* LaunchViewController.swift in Sources */,
+				DEA1BB392C1224BD0025FFD6 /* DetailPresenter.swift in Sources */,
+				DEA1BB372C1224B30025FFD6 /* DetailInteractor.swift in Sources */,
+				DEB3CFDC2C08DFEC00002729 /* Reachability.swift in Sources */,
 				DEB3CF9D2C08D7B900002729 /* SceneDelegate.swift in Sources */,
+				DE52A7FF2C111C5000ADF618 /* HomeEntity.swift in Sources */,
+				DE294F612C0F48B8004C4531 /* LaunchRouter.swift in Sources */,
+				DE52A7F82C111C0A00ADF618 /* HomePresenter.swift in Sources */,
+				DEB3CFD32C08DD9300002729 /* SplashViewController.swift in Sources */,
+				DEB3CFDA2C08DDC400002729 /* SplashInteractor.swift in Sources */,
+				DE52A8062C112B8800ADF618 /* SearchCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

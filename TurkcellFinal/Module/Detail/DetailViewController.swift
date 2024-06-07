@@ -9,6 +9,7 @@ import UIKit
 
 protocol DetailViewControllerProtocol: AnyObject {
     func setupTableView()
+    func setupCollectionViews()
     func reloadData()
     
 }
@@ -30,11 +31,36 @@ final class DetailViewController: BaseViewController {
         return stackView
     }()
     
+    private let headerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let meaningsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
     private let tableView: SelfSizingTableView = {
         let tableView = SelfSizingTableView()
         tableView.backgroundColor = .red
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
+    }()
+    
+    private let synonymCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
     }()
     
     var source: [WordResult]?
@@ -54,13 +80,12 @@ final class DetailViewController: BaseViewController {
         scrollView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            // ScrollView constraints
+
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            // StackView constraints
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
@@ -69,10 +94,15 @@ final class DetailViewController: BaseViewController {
     
         ])
         
+        stackView.addArrangedSubview(meaningsCollectionView)
+        meaningsCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
         stackView.addArrangedSubview(tableView)
         
+        stackView.addArrangedSubview(synonymCollectionView)
+        synonymCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         tableView.rowHeight = UITableView.automaticDimension
-        //tableView.estimatedRowHeight = 100 // Provide an estimated row height for better scroll performance
     }
 
 
@@ -110,37 +140,105 @@ class SelfSizingTableView: UITableView {
     }
 }
 
+extension DetailViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        switch collectionView {
+        case meaningsCollectionView: 
+            return source?.first?.meanings?.count ?? 0
+
+        case synonymCollectionView:
+            return presenter.allSynonyms?.count ?? 0
+        
+        default:
+           break
+        }
+        return Int()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        switch collectionView {
+        case meaningsCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeaningCell.identifier, for: indexPath) as! MeaningCell
+            cell.meaningLabel.text = source?.first?.meanings?[indexPath.row].partOfSpeech
+            return cell
+        case synonymCollectionView:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SynonymCell.identifier, for: indexPath) as! SynonymCell
+            cell.synonymLabel.text = presenter.allSynonyms?[indexPath.row].word
+            return cell
+        default:
+            break
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+}
+
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return source?.first?.meanings?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return source?.first?.meanings?[section].definitions?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.identifier, for: indexPath) as! SearchCell
-        cell.searchLabel.text = "oksadfsdLŞDSKAŞLGAKSLŞGDASKLŞFSAŞKFDASŞLFKASDŞLKŞKFAŞLSDALŞFKSADFAKSŞLDASDFMASD"
+        let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as! InfoCell
+        if let meaning = source?.first?.meanings?[indexPath.section] {
+            let partOfSpeech = meaning.partOfSpeech
+            cell.partOfSpeechLabel.text = "\(indexPath.row + 1)" + (partOfSpeech ?? "")
+        }
+        
+        if let definitions = source?.first?.meanings?[indexPath.section].definitions {
+            cell.definitionLabel.text = definitions[indexPath.row].definition
+        }
+
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        0
+    }
+        
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        nil
+    }
+        
     
 }
 
 extension DetailViewController: DetailViewControllerProtocol {
     
     func setupTableView() {
-        tableView.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
+        tableView.register(InfoCell.self, forCellReuseIdentifier: InfoCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
     }
     
     
+    func setupCollectionViews() {
+        synonymCollectionView.register(SynonymCell.self, forCellWithReuseIdentifier: SynonymCell.identifier)
+        synonymCollectionView.delegate = self
+        synonymCollectionView.dataSource = self
+        
+        meaningsCollectionView.register(MeaningCell.self, forCellWithReuseIdentifier: MeaningCell.identifier)
+        meaningsCollectionView.delegate = self
+        meaningsCollectionView.dataSource = self
+    }
+    
     func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
             print(self.presenter.allSynonyms)
+            self.synonymCollectionView.reloadData()
         }
     }
     

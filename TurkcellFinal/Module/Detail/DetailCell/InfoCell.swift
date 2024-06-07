@@ -9,15 +9,91 @@ import UIKit
 
 class InfoCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static let identifier = "InfoCell"
+    
+    let partOfSpeechLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Labelcık"
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let definitionLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Labelcık"
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.backgroundColor = .red
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    let exampleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Labelcık"
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.textAlignment = .left
+        label.isHidden = true
+        label.backgroundColor = .red
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupViews()
+        
     }
+    
+    private func setupViews(){
+        contentView.addSubview(partOfSpeechLabel)
+        contentView.addSubview(definitionLabel)
+        contentView.addSubview(stackView)
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        NSLayoutConstraint.activate([
+            partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            partOfSpeechLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            partOfSpeechLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            definitionLabel.topAnchor.constraint(equalTo: partOfSpeechLabel.bottomAnchor, constant: 8),
+            definitionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            definitionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+           // definitionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            
+          /* exampleLabel.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 8),
+            exampleLabel.leadingAnchor.constraint(equalTo: definitionLabel.leadingAnchor, constant: 8),
+            exampleLabel.trailingAnchor.constraint(equalTo: definitionLabel.trailingAnchor, constant: -8),
+            
+            exampleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)*/
+            
+            stackView.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 8),
+              stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+              stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+              stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            
+        ])
+        
+        stackView.addArrangedSubview(exampleLabel)
     }
-
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }

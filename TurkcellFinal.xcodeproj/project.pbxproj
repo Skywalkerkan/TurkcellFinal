@@ -21,6 +21,9 @@
 		DE52A8062C112B8800ADF618 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8052C112B8800ADF618 /* SearchCell.swift */; };
 		DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8082C11373B00ADF618 /* ServiceManager.swift */; };
 		DE52A80C2C11376100ADF618 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A80B2C11376100ADF618 /* Word.swift */; };
+		DE9EB2F92C13245400999FA3 /* SynonymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2F82C13245400999FA3 /* SynonymCell.swift */; };
+		DE9EB2FB2C1329EB00999FA3 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */; };
+		DE9EB2FD2C133AEC00999FA3 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */; };
 		DEA1BB2C2C120B6D0025FFD6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB2B2C120B6D0025FFD6 /* BaseViewController.swift */; };
 		DEA1BB302C120BB40025FFD6 /* LoadingShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB2F2C120BB40025FFD6 /* LoadingShowable.swift */; };
 		DEA1BB332C120BED0025FFD6 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB322C120BED0025FFD6 /* LoadingView.swift */; };
@@ -80,6 +83,9 @@
 		DE52A8052C112B8800ADF618 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		DE52A8082C11373B00ADF618 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		DE52A80B2C11376100ADF618 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		DE9EB2F82C13245400999FA3 /* SynonymCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCell.swift; sourceTree = "<group>"; };
+		DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
+		DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		DEA1BB2B2C120B6D0025FFD6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		DEA1BB2F2C120BB40025FFD6 /* LoadingShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingShowable.swift; sourceTree = "<group>"; };
 		DEA1BB322C120BED0025FFD6 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -205,12 +211,23 @@
 		DE52A80D2C11390400ADF618 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				DE9EB2F72C13243000999FA3 /* DetailCell */,
 				DEA1BB342C1224A70025FFD6 /* DetailViewController.swift */,
 				DEA1BB362C1224B30025FFD6 /* DetailInteractor.swift */,
 				DEA1BB382C1224BD0025FFD6 /* DetailPresenter.swift */,
 				DEA1BB3A2C1224C60025FFD6 /* DetailRouter.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		DE9EB2F72C13243000999FA3 /* DetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE9EB2F82C13245400999FA3 /* SynonymCell.swift */,
+				DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */,
+				DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */,
+			);
+			path = DetailCell;
 			sourceTree = "<group>";
 		};
 		DEA1BB2A2C120B580025FFD6 /* Base */ = {
@@ -481,11 +498,13 @@
 				DE52A7FB2C111C3300ADF618 /* HomeInteractor.swift in Sources */,
 				DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */,
 				DE294F5C2C0F448E004C4531 /* LaunchInteractor.swift in Sources */,
+				DE9EB2FD2C133AEC00999FA3 /* InfoCell.swift in Sources */,
 				DE52A7F62C111BFD00ADF618 /* HomeViewController.swift in Sources */,
 				DEA1BB332C120BED0025FFD6 /* LoadingView.swift in Sources */,
 				DEB3CFD82C08DDB600002729 /* SplashPresenter.swift in Sources */,
 				DEB3CFDE2C08E13700002729 /* NetworkManager.swift in Sources */,
 				DE294F5E2C0F4886004C4531 /* LaunchPresenter.swift in Sources */,
+				DE9EB2FB2C1329EB00999FA3 /* MeaningCell.swift in Sources */,
 				DEA1BB352C1224A70025FFD6 /* DetailViewController.swift in Sources */,
 				DE294F642C0F49A4004C4531 /* LaunchCell.swift in Sources */,
 				DEA1BB302C120BB40025FFD6 /* LoadingShowable.swift in Sources */,
@@ -495,6 +514,7 @@
 				DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */,
 				DEA1BB2C2C120B6D0025FFD6 /* BaseViewController.swift in Sources */,
 				DEB3CF9B2C08D7B900002729 /* AppDelegate.swift in Sources */,
+				DE9EB2F92C13245400999FA3 /* SynonymCell.swift in Sources */,
 				DEB3CFA52C08D7B900002729 /* TurkcellFinal.xcdatamodeld in Sources */,
 				DEA1BB3D2C123E590025FFD6 /* Synonym.swift in Sources */,
 				DE52A8032C1120F900ADF618 /* SearchRepository.swift in Sources */,

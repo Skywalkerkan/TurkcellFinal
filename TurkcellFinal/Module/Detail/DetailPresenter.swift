@@ -9,13 +9,14 @@ import Foundation
 
 protocol DetailPresenterProtocol {
     func viewDidload(word: String?)
+    func partOfSpeechDidSelect()
     var allSynonyms: [Synonym]? { get }
 }
 
 final class DetailPresenter {
     
     private var synonyms = [Synonym]()
-    
+   // private var selectedCells:
     unowned var view: DetailViewControllerProtocol
     let interactor: DetailInteractorProtocol
     let router: DetailRouter
@@ -30,13 +31,20 @@ final class DetailPresenter {
 
 extension DetailPresenter: DetailPresenterProtocol {
     
-    var allSynonyms: [Synonym]? {
-        return synonyms
-    }
     
     func viewDidload(word: String?) {
         view.setupTableView()
+        view.setupCollectionViews()
         interactor.fetchSynonms(word: word)
+        view.reloadData()
+    }
+    
+    func partOfSpeechDidSelect() {
+        
+    }
+    
+    var allSynonyms: [Synonym]? {
+        return synonyms
     }
     
 }

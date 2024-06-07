@@ -11,7 +11,7 @@ import Foundation
 struct WordResult: Decodable {
     let word: String?
     let phonetics: [Phonetic]?
-    let meanings: [Meaning]?
+    var meanings: [Meaning]?
     let license: License?
     let sourceUrls: [String]?
 }
@@ -24,16 +24,16 @@ struct License: Decodable {
 
 // MARK: - Meaning
 struct Meaning: Decodable {
-    let partOfSpeech: String?
-    let definitions: [Definition]?
-    let synonyms, antonyms: [String]?
+    var partOfSpeech: String?
+    var definitions: [Definition]?
+    var synonyms, antonyms: [String]?
 }
 
 // MARK: - Definition
 struct Definition: Decodable {
-    let definition: String?
-    let synonyms, antonyms: [String]?
-    let example: String?
+    var definition: String?
+    var synonyms, antonyms: [String]?
+    var example: String?
 }
 
 // MARK: - Phonetic

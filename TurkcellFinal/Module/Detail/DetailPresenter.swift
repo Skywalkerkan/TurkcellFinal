@@ -8,21 +8,23 @@
 import Foundation
 
 protocol DetailPresenterProtocol {
-    func viewDidload(word: String?)
-    func partOfSpeechDidSelect(source: [WordResult]?)
+    func viewDidload(word: String?, source: [WordResult]?)
+    func partOfSpeechDidSelect(selectedPhrase: String?)
     var allSynonyms: [Synonym]? { get }
-    
-    func numberOfSection(source: [WordResult]?) -> Int
-    func numberOfRowsInSection(source: [WordResult]?, section: Int) -> Int
-
-  //  func cellForRowAt(index: Int) -> Meaning?
+    func numberOfSection() -> Int
+    func numberOfRowsInSection(section: Int) -> Int
+    func cellForRowAt(index: Int) -> Meaning?
     
 }
 
 final class DetailPresenter {
     
     private var synonyms = [Synonym]()
-   // private var selectedCells:
+    private var selectedCells = [String]()
+    private var isFiltering = false
+    private var sourceDetail: [WordResult]?
+    private var filteredSourceDetail: [WordResult]?
+
     unowned var view: DetailViewControllerProtocol
     let interactor: DetailInteractorProtocol
     let router: DetailRouter
@@ -36,40 +38,101 @@ final class DetailPresenter {
 }
 
 extension DetailPresenter: DetailPresenterProtocol {
+
     
-    func numberOfRowsInSection(source: [WordResult]?, section: Int) -> Int {
+    func numberOfRowsInSection(section: Int) -> Int {
         // source?.first?.meanings?[section].definitions?.count ?? 0
-        if let definitionsCount = source?.first?.meanings?[section].definitions?.count {
-            return definitionsCount
-        } else {
-            return 0
+        if isFiltering {
+            if let definitionsCount = filteredSourceDetail?.first?.meanings?[section].definitions?.count {
+                return definitionsCount
+            } else {
+                return 0
+            }
+        }else {
+            if let definitionsCount = sourceDetail?.first?.meanings?[section].definitions?.count {
+                return definitionsCount
+            } else {
+                return 0
+            }
         }
+
     }
     
     
-    func numberOfSection(source: [WordResult]?) -> Int {
-        if let meaningCount = source?.first?.meanings?.count {
-            return meaningCount
+    func numberOfSection() -> Int {
+        if isFiltering {
+            if let meaningCount = filteredSourceDetail?.first?.meanings?.count {
+                return meaningCount
+            } else {
+                return 0
+            }
         } else {
-            return 0
+            if let meaningCount = sourceDetail?.first?.meanings?.count {
+                return meaningCount
+            } else {
+                return 0
+            }
         }
+
         
     }
     
-    /*func cellForRowAt(index: Int) -> Meaning? {
-        return Meaning(from: <#any Decoder#>)
-    }*/
+    func cellForRowAt(index: Int) -> Meaning? {
+        
+        if isFiltering{
+            if let meaning = filteredSourceDetail?.first?.meanings?[index]{
+                return meaning
+            }else{
+                return nil
+            }
+        } else {
+            if let meaning = sourceDetail?.first?.meanings?[index]{
+                return meaning
+            }else{
+                return nil
+            }
+        }
+    }
+
     
-    
-    func viewDidload(word: String?) {
+    func viewDidload(word: String?, source: [WordResult]?) {
         view.setupTableView()
         view.setupCollectionViews()
         interactor.fetchSynonms(word: word)
+        self.sourceDetail = source
        // view.reloadData()
     }
+
+    func partOfSpeechDidSelect(selectedPhrase: String?) {
+        
+        if !selectedCells.contains(selectedPhrase ?? ""){
+            selectedCells.append(selectedPhrase ?? "")
+        }
+        
+        if !selectedCells.isEmpty {
+            isFiltering = true
+        }else{
+            isFiltering = false
+        }
+        
+        filterForWord(partOfSpeechList: selectedCells)
+        view.reloadData()
+        
+    }
     
-    func partOfSpeechDidSelect(source: [WordResult]?) {
-        print(source?.first?.meanings?.count)
+    func filterForWord(partOfSpeechList: [String]) {
+        guard !partOfSpeechList.isEmpty, let sourceDetail = sourceDetail else {
+            return
+        }
+
+        let filteredResults = sourceDetail.map { wordResult -> WordResult in
+            var updatedWordResult = wordResult
+            updatedWordResult.meanings = wordResult.meanings?.filter { partOfSpeechList.contains($0.partOfSpeech ?? "") }
+            return updatedWordResult
+        }
+
+        filteredSourceDetail = filteredResults
+        print("ok")
     }
     
     var allSynonyms: [Synonym]? {
@@ -84,8 +147,6 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
         switch result {
         case .success(let synonyms):
             self.synonyms = synonyms
-            print("okey")
-            print(self.synonyms)
             view.reloadData()
         case .failure(let error):
             print("hata alıyom")

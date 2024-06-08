@@ -145,8 +145,8 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         
         switch collectionView {
         case meaningsCollectionView: 
-            return source?.first?.meanings?.count ?? 0
-
+          //  return source?.first?.meanings?.count ?? 0
+            return presenter.partOfSpeechCount()
         case synonymCollectionView:
             return presenter.allSynonyms?.count ?? 0
         
@@ -161,7 +161,8 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         switch collectionView {
         case meaningsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeaningCell.identifier, for: indexPath) as! MeaningCell
-            cell.meaningLabel.text = source?.first?.meanings?[indexPath.row].partOfSpeech
+            //cell.meaningLabel.text = source?.first?.meanings?[indexPath.row].partOfSpeech
+            cell.meaningLabel.text = presenter.partOfSpeech(index: indexPath.row)
             return cell
         case synonymCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SynonymCell.identifier, for: indexPath) as! SynonymCell
@@ -177,8 +178,10 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case meaningsCollectionView:
-            let phrase = source?.first?.meanings?[indexPath.row].partOfSpeech
-            presenter.partOfSpeechDidSelect(selectedPhrase: phrase)
+            
+            //let phrase = source?.first?.meanings?[indexPath.row].partOfSpeech
+            let phrase = presenter.partOfSpeech(index: indexPath.row)
+            presenter.partOfSpeechDidSelect(selectedPhrase: phrase, indexPath: indexPath)
         case synonymCollectionView:
             break
         default:
@@ -218,7 +221,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
 
-        
         /*if let meaning = source?.first?.meanings?[indexPath.section] {
             let partOfSpeech = meaning.partOfSpeech
             cell.partOfSpeechLabel.text = "\(indexPath.row + 1) " + (partOfSpeech ?? "")
@@ -240,7 +242,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
         
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        nil
+        return UIView()
     }
         
     
@@ -268,6 +270,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     func reloadData() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.meaningsCollectionView.reloadData()
             self.synonymCollectionView.reloadData()
         }
     }

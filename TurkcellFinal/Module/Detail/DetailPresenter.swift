@@ -15,6 +15,9 @@ protocol DetailPresenterProtocol {
     //TOPCOLLECTİONVİEW
     func partOfSpeechCount() -> Int
     func partOfSpeech(index: Int) -> String
+    func deleteClicked()
+    
+    var isItFiltering: Bool { get }
     
     
     //TableView
@@ -34,7 +37,6 @@ final class DetailPresenter {
     private var isItFirstTime = true
     
     
-    private var selectedIndexes = [IndexPath]()
     private var allPartOfSpeech = [Meaning]()
     private var isFiltering = false
     private var sourceDetail: [WordResult]?
@@ -53,6 +55,26 @@ final class DetailPresenter {
 }
 
 extension DetailPresenter: DetailPresenterProtocol {
+    
+    func deleteClicked() {
+        isFiltering = false
+        isItFirstTime = true
+        selectedCells.removeAll()
+        unselectedCells.removeAll()
+        if let meanings = sourceDetail?.first?.meanings{
+            for mean in meanings {
+                if let partOfSpeech = mean.partOfSpeech {
+                    unselectedCells.append(partOfSpeech)
+                }
+            }
+        }
+        filteredPartOfSpeech = ["X"]
+        view.reloadData()
+    }
+    
+    var isItFiltering: Bool{
+        return isFiltering
+    }
    
     
     func partOfSpeechCount() -> Int {
@@ -141,10 +163,8 @@ extension DetailPresenter: DetailPresenterProtocol {
                 }
             }
         }
-        
-        print(unselectedCells)
-        
-       // view.reloadData()
+                
+        view.reloadData()
     }
 
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?) {
@@ -169,14 +189,7 @@ extension DetailPresenter: DetailPresenterProtocol {
                 unselectedCells.removeAll { $0 == selected }
             }
         }
-        
-        print("selectedCells \(selectedCells)")
-        print("unselectedCells \(unselectedCells)")
-                
-      /*  if let selectedIndex = selectedIndexes.firstIndex(of: indexPath!) {
-            selectedIndexes.remove(at: selectedIndex)
-        } else {*/
-            selectedIndexes.append(indexPath!)
+
             let joinedList = selectedCells.joined(separator: ", ")
             if isItFirstTime{
                 filteredPartOfSpeech.append(joinedList)
@@ -186,20 +199,13 @@ extension DetailPresenter: DetailPresenterProtocol {
             }else{
                 filteredPartOfSpeech[1] = joinedList
                 for selectedCell in selectedCells {
-                    print(selectedCell, selectedPhrase)
                     if selectedCell == selectedPhrase!{
                         filteredPartOfSpeech.removeAll { $0 == selectedCell }
                     }
                 }
             }
-      //  }
         
         view.reloadData()
-        
-        
-        print("gösterilen \(filteredPartOfSpeech)")
-        print("***********")
-
         
         isItFirstTime = false
     }

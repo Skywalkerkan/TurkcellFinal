@@ -37,11 +37,54 @@ final class DetailViewController: BaseViewController {
         return view
     }()
     
+    private let wordLabel: UILabel = {
+       let label = UILabel()
+        label.text = "Home"
+        label.font = UIFont.boldSystemFont(ofSize: 28)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let pronounceLabel: UILabel = {
+       let label = UILabel()
+        label.text = "homesa"
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = .systemGray
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var soundButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.layer.cornerRadius = 20
+        button.layer.shadowColor = UIColor.systemGray.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowOffset = CGSize(width: 1, height: 1)
+        button.layer.shadowRadius = 4
+        button.layer.masksToBounds = false
+        let image = UIImage(systemName: "person.wave.2")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
+        button.setImage(image, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .white
+        button.addTarget(self, action: #selector(soundButtonClicked), for: .touchUpInside)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        return button
+    }()
+
+
+
+    @objc private func soundButtonClicked() {
+        
+    }
+    
     private let meaningsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -73,6 +116,12 @@ final class DetailViewController: BaseViewController {
     }
     
     private func setupViews() {
+        let backImage = UIImage(systemName: "arrowshape.left.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemCyan)
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        let backButton = UIBarButtonItem(image: nil, style: .done, target: nil, action: nil)
+        backButton.title = ""
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         
         view.backgroundColor = .white
         view.addSubview(scrollView)
@@ -91,6 +140,26 @@ final class DetailViewController: BaseViewController {
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
     
+        ])
+        
+        stackView.addArrangedSubview(headerView)
+        headerView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        headerView.addSubview(wordLabel)
+        headerView.addSubview(pronounceLabel)
+        headerView.addSubview(soundButton)
+        
+        NSLayoutConstraint.activate([
+            wordLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 16),
+            wordLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            
+            pronounceLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 8),
+            pronounceLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
+            
+            soundButton.topAnchor.constraint(equalTo: wordLabel.topAnchor),
+            soundButton.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -24),
+            soundButton.heightAnchor.constraint(equalToConstant: 40),
+            soundButton.widthAnchor.constraint(equalToConstant: 40)
+
         ])
         
         stackView.addArrangedSubview(meaningsCollectionView)
@@ -162,6 +231,19 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         case meaningsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeaningCell.identifier, for: indexPath) as! MeaningCell
             //cell.meaningLabel.text = source?.first?.meanings?[indexPath.row].partOfSpeech
+            
+            if presenter.isItFiltering && indexPath.row == 0{
+                cell.contentView.layer.borderColor = UIColor.red.cgColor
+                cell.meaningLabel.textColor = .red
+                cell.contentView.layer.cornerRadius = 18
+            }else if presenter.isItFiltering && indexPath.row == 1{
+                cell.contentView.layer.borderColor = UIColor.systemCyan.cgColor
+                cell.meaningLabel.textColor = .black
+              }else{
+                  cell.contentView.layer.borderColor = UIColor.black.cgColor
+                  cell.meaningLabel.textColor = .black
+              }
+            
             cell.meaningLabel.text = presenter.partOfSpeech(index: indexPath.row)
             return cell
         case synonymCollectionView:
@@ -179,8 +261,15 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         switch collectionView {
         case meaningsCollectionView:
             //let phrase = source?.first?.meanings?[indexPath.row].partOfSpeech
-            let phrase = presenter.partOfSpeech(index: indexPath.row)
-            presenter.partOfSpeechDidSelect(selectedPhrase: phrase, indexPath: indexPath)
+            if presenter.isItFiltering && indexPath.row == 0{
+                presenter.deleteClicked()
+            }else if presenter.isItFiltering && indexPath.row == 1{
+                break
+            } else{
+                let phrase = presenter.partOfSpeech(index: indexPath.row)
+                presenter.partOfSpeechDidSelect(selectedPhrase: phrase, indexPath: indexPath)
+            }
+          
         case synonymCollectionView:
             break
         default:
@@ -236,11 +325,32 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+           // Başlık görünümüne özel köşe yarıçapı verme
+           if let headerView = view as? UITableViewHeaderFooterView {
+               // İstediğiniz köşe yarıçapını ayarlayın
+               headerView.layer.cornerRadius = 10 // Örnek değer
+               headerView.clipsToBounds = true
+           }
+       }
+       
+    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
+           // Altbilgi görünümüne özel köşe yarıçapı verme
+           if let footerView = view as? UITableViewHeaderFooterView {
+               // İstediğiniz köşe yarıçapını ayarlayın
+               footerView.layer.cornerRadius = 10 // Örnek değer
+               footerView.clipsToBounds = true
+           }
+       }
+    
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        0
+        10
     }
         
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .red
         return UIView()
     }
         

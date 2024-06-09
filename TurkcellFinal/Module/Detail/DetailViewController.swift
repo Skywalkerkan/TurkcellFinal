@@ -178,7 +178,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case meaningsCollectionView:
-            
             //let phrase = source?.first?.meanings?[indexPath.row].partOfSpeech
             let phrase = presenter.partOfSpeech(index: indexPath.row)
             presenter.partOfSpeechDidSelect(selectedPhrase: phrase, indexPath: indexPath)

@@ -27,15 +27,15 @@ class MeaningCell: UICollectionViewCell {
     
     private func setupViews(){
         
-        contentView.layer.cornerRadius = 16
+        contentView.layer.cornerRadius = 18
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.black.cgColor
         
         contentView.addSubview(meaningLabel)
         NSLayoutConstraint.activate([
             meaningLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            meaningLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            meaningLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            meaningLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            meaningLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             meaningLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }

@@ -53,7 +53,41 @@ final class HomeViewController: BaseViewController {
         setupViews()
         presenter.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
     }
+    
+    @objc func dismissKeyboard() {
+        searchController.searchBar.resignFirstResponder()
+        searchController.isActive = false
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            
+            let searchButtonCenterY = searchButton.superview!.convert(searchButton.frame.origin, to: nil).y
+                let distanceToBottom = self.view.frame.height - searchButtonCenterY
+                if keyboardHeight > distanceToBottom - 40 {
+                    UIView.animate(withDuration: 0.3) {
+                        let translationY = -(keyboardHeight - distanceToBottom + 60)
+                        self.searchButton.transform = CGAffineTransform(translationX: 0, y: translationY)
+                    }
+                }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+           UIView.animate(withDuration: 0.3) {
+               self.searchButton.transform = .identity
+           }
+       }
+    
     
     private func setupViews() {
         view.backgroundColor = .white

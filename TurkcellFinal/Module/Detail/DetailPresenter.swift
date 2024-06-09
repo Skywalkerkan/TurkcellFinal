@@ -149,7 +149,6 @@ extension DetailPresenter: DetailPresenterProtocol {
 
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?) {
         
-        
         if !selectedCells.contains(selectedPhrase ?? ""){
             selectedCells.append(selectedPhrase ?? "")
         }
@@ -161,7 +160,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         }
         
         filterForWord(partOfSpeechList: selectedCells)
-        view.reloadData()
         
         //TODO: İNDEXPATHLERİ FORCELAMA
         
@@ -181,18 +179,15 @@ extension DetailPresenter: DetailPresenterProtocol {
             selectedIndexes.append(indexPath!)
             let joinedList = selectedCells.joined(separator: ", ")
             if isItFirstTime{
-                print("giriyor mu1")
                 filteredPartOfSpeech.append(joinedList)
                 for unselectedCell in unselectedCells {
                     filteredPartOfSpeech.append(unselectedCell)
                 }
             }else{
-                print("giriyor mu")
                 filteredPartOfSpeech[1] = joinedList
                 for selectedCell in selectedCells {
                     print(selectedCell, selectedPhrase)
                     if selectedCell == selectedPhrase!{
-                      //  print("giriyor")
                         filteredPartOfSpeech.removeAll { $0 == selectedCell }
                     }
                 }
@@ -204,22 +199,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         
         print("gösterilen \(filteredPartOfSpeech)")
         print("***********")
-        
-       /* if let meaning = sourceDetail?.first?.meanings {
-            for i in meaning{
-                print(i.partOfSpeech)
-            }
-        }*/
-        
-        /*for i in unselectedCells {
-            if filteredPartOfSpeech.contains(i){
-                print("burası")
-                print(i)
-            }
-            filteredPartOfSpeech.append(i)
-        }
-        print(selectedCells)
-        print(filteredPartOfSpeech)*/
 
         
         isItFirstTime = false

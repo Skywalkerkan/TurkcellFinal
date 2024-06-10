@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol DetailViewControllerProtocol: AnyObject {
     func setupTableView()
@@ -74,9 +75,19 @@ final class DetailViewController: BaseViewController {
     }()
 
 
-
+    var player: AVPlayer?
+    
     @objc private func soundButtonClicked() {
-        
+        if let audioURL = presenter.didSoundButtonClicked() {
+            playAudio(from: audioURL)
+        } else{
+            print("yokki")
+        }
+    }
+    
+    func playAudio(from url: URL) {
+        player = AVPlayer(url: url)
+        player?.play()
     }
     
     private let meaningsCollectionView: UICollectionView = {
@@ -112,6 +123,10 @@ final class DetailViewController: BaseViewController {
     override func viewDidLoad() {
         setupViews()
         presenter.viewDidload(word: source?.first?.word, source: source)
+        
+        
+        wordLabel.text = source?.first?.word
+        pronounceLabel.text = source?.first?.phonetic
         
     }
     

@@ -10,6 +10,7 @@ import Foundation
 // MARK: - WordElement
 struct WordResult: Decodable {
     let word: String?
+    let phonetic: String?
     let phonetics: [Phonetic]?
     var meanings: [Meaning]?
     let license: License?

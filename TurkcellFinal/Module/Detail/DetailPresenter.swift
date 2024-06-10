@@ -16,9 +16,9 @@ protocol DetailPresenterProtocol {
     func partOfSpeechCount() -> Int
     func partOfSpeech(index: Int) -> String
     func deleteClicked()
+    func didSoundButtonClicked() -> URL?
     
     var isItFiltering: Bool { get }
-    
     
     //TableView
     func numberOfSection() -> Int
@@ -35,7 +35,6 @@ final class DetailPresenter {
     private var selectedCells = [String]()
     private var unselectedCells = [String]()
     private var isItFirstTime = true
-    
     
     private var allPartOfSpeech = [Meaning]()
     private var isFiltering = false
@@ -55,6 +54,19 @@ final class DetailPresenter {
 }
 
 extension DetailPresenter: DetailPresenterProtocol {
+    
+    func didSoundButtonClicked() -> URL? {
+        if let phonetics = sourceDetail?.first?.phonetics{
+            for phonetic in phonetics {
+                
+                if let audio = phonetic.audio, !audio.isEmpty, let url = URL(string: audio) {
+                    return url
+                }
+            }
+        }
+        return nil
+    }
+    
     
     func deleteClicked() {
         isFiltering = false
@@ -206,7 +218,6 @@ extension DetailPresenter: DetailPresenterProtocol {
             }
         
         view.reloadData()
-        
         isItFirstTime = false
     }
     
@@ -242,6 +253,5 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
             print("hata alıyom")
         }
     }
-    
     
 }

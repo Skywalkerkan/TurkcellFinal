@@ -20,6 +20,7 @@ final class DetailViewController: BaseViewController {
     
      private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+         scrollView.showsVerticalScrollIndicator = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -106,7 +107,7 @@ final class DetailViewController: BaseViewController {
         let tableView = SelfSizingTableView()
         tableView.backgroundColor = .systemGray6
         tableView.layer.cornerRadius = 20
-        tableView.sectionHeaderTopPadding = 0
+        tableView.sectionHeaderTopPadding = 12
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
         tableView.clipsToBounds = true
@@ -346,14 +347,17 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         //let partOfSpeech = presenter.cellForRowAt(index: indexPath.section)
         //cell.partOfSpeechLabel.text = /*"\(indexPath.row + 1) " +*/ (partOfSpeech?.partOfSpeech ?? "")
         
-        cell.definitionLabel.text = "\(indexPath.row) " + (presenter.cellForRowAt(index: indexPath.section)?.definitions?[indexPath.row].definition ?? " ")
+        
+        let definitonText = presenter.cellForRowAt(index: indexPath.section)?.definitions?[indexPath.row].definition ?? " "
+        
+        cell.definitionLabel.text = "    " + "\(definitonText)"
+        cell.partOfSpeechLabel.text = "\(indexPath.row+1)"
 
         if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions, let example = definitions[indexPath.row].example{
             cell.exampleLabel.text = "Example: \(example)"
         }else{
             cell.exampleLabel.text = ""
         }
-
 
         /*if let meaning = source?.first?.meanings?[indexPath.section] {
             let partOfSpeech = meaning.partOfSpeech
@@ -392,9 +396,9 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 40
+            return 48
         }else {
-            return 40
+            return 48
         }
     }
         
@@ -404,7 +408,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         view.backgroundColor = .white
         let partOfSpeechLabel = UILabel()
         partOfSpeechLabel.text = "ok"
-        partOfSpeechLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        partOfSpeechLabel.font = UIFont.boldSystemFont(ofSize: 22)
         partOfSpeechLabel.textColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 1)
         partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
         let imageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill")?
@@ -415,7 +419,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         view.addSubview(imageView)
         view.addSubview(partOfSpeechLabel)
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
             imageView.heightAnchor.constraint(equalToConstant: 15),
             imageView.widthAnchor.constraint(equalToConstant: 12),
@@ -424,14 +428,30 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         ])
 
         if section == 0 {
+            view.layer.cornerRadius = 12
+            view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             let partOfSpeech = presenter.cellForRowAt(index: section)
             partOfSpeechLabel.text = partOfSpeech?.partOfSpeech
             return view
         }else{
+            view.layer.cornerRadius = 12
+            view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
             let partOfSpeech = presenter.cellForRowAt(index: section)
             partOfSpeechLabel.text = partOfSpeech?.partOfSpeech
             return view
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 12
+        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        return view
     }
         
     

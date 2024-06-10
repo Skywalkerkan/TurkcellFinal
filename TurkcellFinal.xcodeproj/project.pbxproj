@@ -32,6 +32,7 @@
 		DEA1BB392C1224BD0025FFD6 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB382C1224BD0025FFD6 /* DetailPresenter.swift */; };
 		DEA1BB3B2C1224C60025FFD6 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB3A2C1224C60025FFD6 /* DetailRouter.swift */; };
 		DEA1BB3D2C123E590025FFD6 /* Synonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA1BB3C2C123E590025FFD6 /* Synonym.swift */; };
+		DEA587E72C17B1D4005A1D68 /* InfoCellPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEA587E62C17B1D4005A1D68 /* InfoCellPresenter.swift */; };
 		DEB3CF9B2C08D7B900002729 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */; };
 		DEB3CF9D2C08D7B900002729 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */; };
 		DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB3CF9E2C08D7B900002729 /* ViewController.swift */; };
@@ -94,6 +95,7 @@
 		DEA1BB382C1224BD0025FFD6 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		DEA1BB3A2C1224C60025FFD6 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		DEA1BB3C2C123E590025FFD6 /* Synonym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synonym.swift; sourceTree = "<group>"; };
+		DEA587E62C17B1D4005A1D68 /* InfoCellPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCellPresenter.swift; sourceTree = "<group>"; };
 		DEB3CF972C08D7B900002729 /* TurkcellFinal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TurkcellFinal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,9 +225,9 @@
 		DE9EB2F72C13243000999FA3 /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
+				DEA587E52C17B1BF005A1D68 /* InfoCell */,
 				DE9EB2F82C13245400999FA3 /* SynonymCell.swift */,
 				DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */,
-				DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */,
 			);
 			path = DetailCell;
 			sourceTree = "<group>";
@@ -252,6 +254,15 @@
 				DEA1BB322C120BED0025FFD6 /* LoadingView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		DEA587E52C17B1BF005A1D68 /* InfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */,
+				DEA587E62C17B1D4005A1D68 /* InfoCellPresenter.swift */,
+			);
+			path = InfoCell;
 			sourceTree = "<group>";
 		};
 		DEB3CF8E2C08D7B900002729 = {
@@ -517,6 +528,7 @@
 				DE9EB2F92C13245400999FA3 /* SynonymCell.swift in Sources */,
 				DEB3CFA52C08D7B900002729 /* TurkcellFinal.xcdatamodeld in Sources */,
 				DEA1BB3D2C123E590025FFD6 /* Synonym.swift in Sources */,
+				DEA587E72C17B1D4005A1D68 /* InfoCellPresenter.swift in Sources */,
 				DE52A8032C1120F900ADF618 /* SearchRepository.swift in Sources */,
 				DE294F5A2C0F4484004C4531 /* LaunchViewController.swift in Sources */,
 				DEA1BB392C1224BD0025FFD6 /* DetailPresenter.swift in Sources */,

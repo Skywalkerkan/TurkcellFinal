@@ -7,14 +7,17 @@
 
 import UIKit
 
+
+
 class InfoCell: UITableViewCell {
 
     static let identifier = "InfoCell"
     
     let partOfSpeechLabel: UILabel = {
         let label = UILabel()
-        label.text = "Labelcık"
         label.textColor = .black
+        label.text = "erkan"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -66,31 +69,32 @@ class InfoCell: UITableViewCell {
     
     private func setupViews(){
                 
-       // contentView.addSubview(partOfSpeechLabel)
+        contentView.addSubview(partOfSpeechLabel)
         contentView.addSubview(definitionLabel)
         contentView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-           /* partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            /*partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             partOfSpeechLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             partOfSpeechLabel.heightAnchor.constraint(equalToConstant: 40),*/
+            
+            partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
+            partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             
             definitionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             definitionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             definitionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
            // definitionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
-            
           /* exampleLabel.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 8),
             exampleLabel.leadingAnchor.constraint(equalTo: definitionLabel.leadingAnchor, constant: 8),
             exampleLabel.trailingAnchor.constraint(equalTo: definitionLabel.trailingAnchor, constant: -8),
-            
             exampleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)*/
             
-            stackView.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 8),
+              stackView.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 4),
               stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
               stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-              stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+              stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             
         ])
         

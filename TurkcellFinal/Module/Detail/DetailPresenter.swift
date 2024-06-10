@@ -24,7 +24,6 @@ protocol DetailPresenterProtocol {
     func numberOfSection() -> Int
     func numberOfRowsInSection(section: Int) -> Int
     func cellForRowAt(index: Int) -> Meaning?
-    
 }
 
 final class DetailPresenter {
@@ -105,7 +104,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         }
     }
     
-
     //TableView
     func numberOfRowsInSection(section: Int) -> Int {
         // source?.first?.meanings?[section].definitions?.count ?? 0
@@ -140,8 +138,6 @@ extension DetailPresenter: DetailPresenterProtocol {
                 return 0
             }
         }
-
-        
     }
     
     func cellForRowAt(index: Int) -> Meaning? {
@@ -253,5 +249,4 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
             print("hata alıyom")
         }
     }
-    
 }

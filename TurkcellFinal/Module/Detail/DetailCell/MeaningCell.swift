@@ -29,7 +29,12 @@ class MeaningCell: UICollectionViewCell {
         
         contentView.layer.cornerRadius = 18
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.shadowColor = UIColor.darkGray.cgColor
+        contentView.layer.shadowOpacity = 0.7
+        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        contentView.layer.shadowRadius = 2
+        contentView.layer.masksToBounds = false
         
         contentView.addSubview(meaningLabel)
         NSLayoutConstraint.activate([

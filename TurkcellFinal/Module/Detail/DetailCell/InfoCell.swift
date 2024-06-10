@@ -47,6 +47,14 @@ class InfoCell: UITableViewCell {
         return label
     }()
     
+    let exampleImageView: UIImageView = {
+        let image = UIImage(systemName: "square.fill")?
+            .withRenderingMode(.alwaysOriginal)
+            .withTintColor(.black)
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,17 +65,18 @@ class InfoCell: UITableViewCell {
     }
     
     private func setupViews(){
-        contentView.addSubview(partOfSpeechLabel)
+                
+       // contentView.addSubview(partOfSpeechLabel)
         contentView.addSubview(definitionLabel)
         contentView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-            partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+           /* partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             partOfSpeechLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            partOfSpeechLabel.heightAnchor.constraint(equalToConstant: 40),
+            partOfSpeechLabel.heightAnchor.constraint(equalToConstant: 40),*/
             
-            definitionLabel.topAnchor.constraint(equalTo: partOfSpeechLabel.bottomAnchor, constant: 8),
+            definitionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             definitionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             definitionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
            // definitionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
@@ -86,6 +95,7 @@ class InfoCell: UITableViewCell {
         ])
         
         stackView.addArrangedSubview(exampleLabel)
+        
     }
     
     required init?(coder: NSCoder) {

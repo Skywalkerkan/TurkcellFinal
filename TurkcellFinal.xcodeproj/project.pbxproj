@@ -21,6 +21,7 @@
 		DE52A8062C112B8800ADF618 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8052C112B8800ADF618 /* SearchCell.swift */; };
 		DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8082C11373B00ADF618 /* ServiceManager.swift */; };
 		DE52A80C2C11376100ADF618 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A80B2C11376100ADF618 /* Word.swift */; };
+		DE9666542C186C9C009D878D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9666532C186C9C009D878D /* StringExtension.swift */; };
 		DE9EB2F92C13245400999FA3 /* SynonymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2F82C13245400999FA3 /* SynonymCell.swift */; };
 		DE9EB2FB2C1329EB00999FA3 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */; };
 		DE9EB2FD2C133AEC00999FA3 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */; };
@@ -84,6 +85,7 @@
 		DE52A8052C112B8800ADF618 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		DE52A8082C11373B00ADF618 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		DE52A80B2C11376100ADF618 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		DE9666532C186C9C009D878D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		DE9EB2F82C13245400999FA3 /* SynonymCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCell.swift; sourceTree = "<group>"; };
 		DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
 		DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -222,11 +224,27 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		DE9666512C18655F009D878D /* SynonymCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE9EB2F82C13245400999FA3 /* SynonymCell.swift */,
+			);
+			path = SynonymCell;
+			sourceTree = "<group>";
+		};
+		DE9666522C186C88009D878D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DE9666532C186C9C009D878D /* StringExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		DE9EB2F72C13243000999FA3 /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
+				DE9666512C18655F009D878D /* SynonymCell */,
 				DEA587E52C17B1BF005A1D68 /* InfoCell */,
-				DE9EB2F82C13245400999FA3 /* SynonymCell.swift */,
 				DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */,
 			);
 			path = DetailCell;
@@ -288,6 +306,7 @@
 		DEB3CF992C08D7B900002729 /* TurkcellFinal */ = {
 			isa = PBXGroup;
 			children = (
+				DE9666522C186C88009D878D /* Extensions */,
 				DEB3CFCD2C08D8C600002729 /* Network */,
 				DE52A80A2C11374E00ADF618 /* Entities */,
 				DE52A8012C1120E600ADF618 /* CoreData */,
@@ -520,6 +539,7 @@
 				DE294F642C0F49A4004C4531 /* LaunchCell.swift in Sources */,
 				DEA1BB302C120BB40025FFD6 /* LoadingShowable.swift in Sources */,
 				DE52A80C2C11376100ADF618 /* Word.swift in Sources */,
+				DE9666542C186C9C009D878D /* StringExtension.swift in Sources */,
 				DE52A7FD2C111C3900ADF618 /* HomeRouter.swift in Sources */,
 				DEB3CFD52C08DDA700002729 /* SplashRouter.swift in Sources */,
 				DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */,

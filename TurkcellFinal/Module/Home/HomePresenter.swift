@@ -13,11 +13,13 @@ protocol HomePresenterProtocol {
     func searchButtonClicked(word: String?)
     var fetchedSearches: [Search] { get }
     var fetchedWordInfo: [WordResult] { get }
+    func didSelectRowAt(_ word: String?)
 }
 
 final class HomePresenter {
     
     private var searchs = [Search]()
+    private var searchWord: String?
     private var wordResult = [WordResult]()
     unowned var view: HomeViewControllerProtocol
     let interactor: HomeInteractorProtocol
@@ -31,6 +33,13 @@ final class HomePresenter {
 }
 
 extension HomePresenter: HomePresenterProtocol {
+    
+    func didSelectRowAt(_ word: String?) {
+        view.showLoadingView()
+        searchWord = word?.capitalizingFirstLetter()
+        interactor.fetchWord(word: word)
+        print("kelime: \(word)")
+    }
     
     var fetchedWordInfo: [WordResult] {
        /* DispatchQueue.main.async {
@@ -49,6 +58,7 @@ extension HomePresenter: HomePresenterProtocol {
     
     func searchButtonClicked(word: String?) {
         view.showLoadingView()
+        searchWord = word?.capitalizingFirstLetter()
         interactor.fetchWord(word: word)
     }
     
@@ -64,9 +74,12 @@ extension HomePresenter: HomeInteractorOutputProtocol {
         switch result {
         case .success(let wordResults):
             self.wordResult = wordResults
-            //view.getWordInfo()
+            view.getWordInfo()
             view.hideLoadingView()
             router.navigate(.detail(self.wordResult))
+            DispatchQueue.main.async {
+                self.interactor.saveWord(word: self.searchWord)
+            }
         case .failure(let error):
             view.getError(error.localizedDescription)
             view.hideLoadingView()

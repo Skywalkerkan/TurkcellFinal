@@ -12,7 +12,6 @@ protocol DetailViewControllerProtocol: AnyObject {
     func setupTableView()
     func setupCollectionViews()
     func reloadData()
-    
 }
 
 
@@ -133,7 +132,8 @@ final class DetailViewController: BaseViewController {
         setupViews()
         presenter.viewDidload(word: source?.first?.word, source: source)
         
-        
+        navigationController?.navigationBar.isHidden = false
+
         wordLabel.text = source?.first?.word
         pronounceLabel.text = source?.first?.phonetic
         
@@ -142,7 +142,7 @@ final class DetailViewController: BaseViewController {
     private func setupViews() {
         
         
-        let backImage = UIImage(systemName: "arrowshape.left.fill")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemCyan)
+        let backImage = UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemCyan)
         navigationController?.navigationBar.backIndicatorImage = backImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         let backButton = UIBarButtonItem(image: nil, style: .done, target: nil, action: nil)
@@ -192,12 +192,6 @@ final class DetailViewController: BaseViewController {
             meaningsCollectionView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 0),
             meaningsCollectionView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: 0)
         ])
-        
-      //  stackView.addArrangedSubview(meaningsCollectionView)
-       // meaningsCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
-        //stackView.addArrangedSubview(tableView)
-        
         
         let tableViewWrapper = UIView()
         tableViewWrapper.addSubview(tableView)
@@ -258,7 +252,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         
         switch collectionView {
         case meaningsCollectionView: 
-          //  return source?.first?.meanings?.count ?? 0
             return presenter.partOfSpeechCount()
         case synonymCollectionView:
             return presenter.allSynonyms?.count ?? 0
@@ -274,7 +267,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         switch collectionView {
         case meaningsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeaningCell.identifier, for: indexPath) as! MeaningCell
-            //cell.meaningLabel.text = source?.first?.meanings?[indexPath.row].partOfSpeech
             
             if presenter.isItFiltering && indexPath.row == 0{
                 cell.contentView.backgroundColor = UIColor(red: 250/255, green: 80/255, blue: 80/255, alpha: 0.8)
@@ -332,63 +324,42 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-      //  return source?.first?.meanings?.count ?? 0
         return presenter.numberOfSection()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return source?.first?.meanings?[section].definitions?.count ?? 0
         return presenter.numberOfRowsInSection(section: section)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as! InfoCell
         
-        //let partOfSpeech = presenter.cellForRowAt(index: indexPath.section)
-        //cell.partOfSpeechLabel.text = /*"\(indexPath.row + 1) " +*/ (partOfSpeech?.partOfSpeech ?? "")
-        
-        
-        let definitonText = presenter.cellForRowAt(index: indexPath.section)?.definitions?[indexPath.row].definition ?? " "
-        
-        cell.definitionLabel.text = "    " + "\(definitonText)"
         cell.partOfSpeechLabel.text = "\(indexPath.row+1)"
 
-        if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions, let example = definitions[indexPath.row].example{
-            cell.exampleLabel.text = "Example: \(example)"
+        
+        if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions,
+           let _ = definitions[indexPath.row].example {
+            let definition = definitions[indexPath.row]
+            cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition)
         }else{
-            cell.exampleLabel.text = ""
+            if let definition = presenter.cellForRowAt(index: indexPath.section)?.definitions {
+                cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition[indexPath.row])
+            }
         }
-
-        /*if let meaning = source?.first?.meanings?[indexPath.section] {
-            let partOfSpeech = meaning.partOfSpeech
-            cell.partOfSpeechLabel.text = "\(indexPath.row + 1) " + (partOfSpeech ?? "")
-        }
-        
-        if let definitions = source?.first?.meanings?[indexPath.section].definitions {
-            cell.definitionLabel.text = definitions[indexPath.row].definition
-        }
-        
-        if let definitions = source?.first?.meanings?[indexPath.section].definitions, let example = definitions[indexPath.row].example {
-            cell.exampleLabel.text = "Example: " + example
-        }*/
 
         return cell
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-           // Başlık görünümüne özel köşe yarıçapı verme
            if let headerView = view as? UITableViewHeaderFooterView {
-               // İstediğiniz köşe yarıçapını ayarlayın
-               headerView.layer.cornerRadius = 10 // Örnek değer
+               headerView.layer.cornerRadius = 10
                headerView.clipsToBounds = true
            }
        }
        
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-           // Altbilgi görünümüne özel köşe yarıçapı verme
            if let footerView = view as? UITableViewHeaderFooterView {
-               // İstediğiniz köşe yarıçapını ayarlayın
-               footerView.layer.cornerRadius = 10 // Örnek değer
+               footerView.layer.cornerRadius = 10
                footerView.clipsToBounds = true
            }
        }

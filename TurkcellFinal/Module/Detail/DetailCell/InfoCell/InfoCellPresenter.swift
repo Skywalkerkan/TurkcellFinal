@@ -6,8 +6,6 @@
 //
 
 import Foundation
-import UIKit
-/*
 
 protocol InfoCellPresenterProtocol {
     func load()
@@ -15,15 +13,12 @@ protocol InfoCellPresenterProtocol {
 
 final class InfoCellPresenter {
     
-    weak var view: NewsCellProtocol?
-    private let news: News
+    weak var view: InfoCellProtocol?
+    private let definition: Definition
     
-    init(
-        view: NewsCellProtocol?,
-        news: News
-    ) {
+    init(view: InfoCellProtocol?, definition: Definition) {
         self.view = view
-        self.news = news
+        self.definition = definition
     }
     
 }
@@ -32,17 +27,17 @@ extension InfoCellPresenter: InfoCellPresenterProtocol {
     
     func load() {
         
-        ImageDownloader.shared.image(news: news, format: .threeByTwoSmallAt2X) { [weak self] data, error in
-            guard let self else { return }
-            if let data {
-                guard let image = UIImage(data: data) else { return }
-                self.view?.setImage(image)
-            }
+        
+        if let definition = definition.definition {
+            view?.setDefinition(definition)
         }
+        
+        view?.setExample(definition.example)
+        
+        
                 
-        view?.setTitleLabel(news.title ?? "")
-        view?.setAuthorLabel(news.byline ?? "")
+       // view?.setTitleLabel(news.title ?? "")
+
     }
     
 }
-*/

@@ -19,12 +19,36 @@ protocol HomeViewControllerProtocol: AnyObject {
 
 final class HomeViewController: BaseViewController {
     
-    private let searchController = UISearchController(searchResultsController: nil)
-    private let searchContainerView = UIView()
+    private lazy var tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    private let searchButtonTapGesture = UITapGestureRecognizer(target: nil, action: nil)
+    
+    var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.searchTextField.backgroundColor = UIColor(red: 45/255, green: 48/255, blue: 55/255, alpha: 1)
+        searchBar.backgroundImage = UIImage()
+        searchBar.placeholder = "Search Your Word..."
+        searchBar.searchTextField.textColor = .white
+        if let searchTextField = searchBar.value(forKey: "searchField") as? UITextField {
+              let attributes: [NSAttributedString.Key: Any] = [
+                  .foregroundColor: UIColor.lightGray,
+                  .font: UIFont.systemFont(ofSize: 17)
+              ]
+              searchTextField.attributedPlaceholder = NSAttributedString(string: "Search Your Game", attributes: attributes)
+          }
+        searchBar.searchTextField.leftView?.tintColor = .gray
+        searchBar.layer.zPosition = 2
+        return searchBar
+    }()
+    
     private var chosenText: String?
     
     private let tableView: UITableView = {
         let tableView = UITableView()
+        tableView.backgroundColor = .white
+        tableView.layer.cornerRadius = 12
+        tableView.sectionHeaderTopPadding = 0
+        tableView.bouncesVertically = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -41,7 +65,7 @@ final class HomeViewController: BaseViewController {
     }()
     
     @objc private func searchButtonClicked(){
-        
+        searchBar.resignFirstResponder()
         presenter.searchButtonClicked(word: chosenText)
     }
     
@@ -49,22 +73,39 @@ final class HomeViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       /* navigationItem.searchController = searchController
+       // searchController.obscuresBackgroundDuringPresentation = false
+        if let searchTextField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            searchTextField.autocorrectionType = .no
+        }
+        searchController.searchBar.placeholder = "Search Words..."
+        searchController.searchBar.delegate = self
+       // definesPresentationContext = true
+        if let searchBarTextField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
+            searchBarTextField.backgroundColor = UIColor.white
+        }*/
+        
+
         
         setupViews()
-        presenter.viewDidLoad()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.delegate = self
         view.addGestureRecognizer(tapGesture)
-        
+
+        searchButtonTapGesture.delegate = self
+        searchButton.addGestureRecognizer(searchButtonTapGesture)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        presenter.viewDidLoad()
     }
     
     @objc func dismissKeyboard() {
-        searchController.searchBar.resignFirstResponder()
-        searchController.isActive = false
+        searchBar.resignFirstResponder()
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -90,24 +131,22 @@ final class HomeViewController: BaseViewController {
     
     
     private func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGray6
         
-        navigationItem.searchController = searchController
-        searchController.obscuresBackgroundDuringPresentation = false
-        if let searchTextField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            searchTextField.autocorrectionType = .no
-        }
-        searchController.searchBar.placeholder = "Search Words..."
-        definesPresentationContext = true
-        if let searchBarTextField = searchController.searchBar.value(forKey: "searchField") as? UITextField {
-            searchBarTextField.backgroundColor = UIColor.white
-        }
+        navigationController?.navigationBar.isHidden = true
+        
+        view.addSubview(searchBar)
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+        ])
         
         view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 
         ])
@@ -119,8 +158,6 @@ final class HomeViewController: BaseViewController {
             searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             searchButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-
     }
     
 }
@@ -137,21 +174,22 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.resignFirstResponder()
+        let word = presenter.fetchedSearches[indexPath.row].searchString
+        presenter.didSelectRowAt(word)
+    }
     
 }
 
-extension HomeViewController: UISearchResultsUpdating, UISearchControllerDelegate {
-    func updateSearchResults(for searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text {
-                 print("Search text: \(searchText)")
-
-                chosenText = searchText
-             }
-    }
+extension HomeViewController: UISearchBarDelegate {
     
-    func didPresentSearchController(_ searchController: UISearchController) {
-        print("ok")
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+            chosenText = searchText
     }
+
+    
 }
 
 
@@ -172,13 +210,13 @@ extension HomeViewController: HomeViewControllerProtocol {
     
     func getError(_ errorString: String) {
         DispatchQueue.main.async {
-            self.showAlert(with: "Alert", message: errorString)
+            self.showAlert(with: "Alert", message: "We could not find your word please write a word appropriately")
         }
     }
     
     
     func getWordInfo() {
-        print("Aldık")
+
     }
     
     func setupTableView() {
@@ -188,8 +226,7 @@ extension HomeViewController: HomeViewControllerProtocol {
     }
     
     func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.delegate = self
+        searchBar.delegate = self
     }
     
     func reloadData() {
@@ -198,4 +235,17 @@ extension HomeViewController: HomeViewControllerProtocol {
         }
     }
     
+}
+
+extension HomeViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if gestureRecognizer == tapGesture {
+            searchBar.resignFirstResponder()
+            return false
+        } else if gestureRecognizer == searchButtonTapGesture {
+            return false
+        }
+        return true
+        
+    }
 }

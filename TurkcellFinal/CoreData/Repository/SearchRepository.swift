@@ -13,9 +13,34 @@ protocol SearchRepositoryProtocol {
     
     func saveSearch(search: Search)
     func fetchSearchedWords() -> [Search]?
+    func deleteSameSearch(search: Search)
 }
 
 final class SearchRepository: SearchRepositoryProtocol {
+    
+    
+    func deleteSameSearch(search: Search) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Searchs")
+        guard let searchString = search.searchString else { return }
+        fetchRequest.predicate = NSPredicate(format: "search == %@", searchString)
+        
+        do {
+            let results = try context.fetch(fetchRequest) as? [NSManagedObject]
+            
+            for object in results ?? [] {
+                context.delete(object)
+            }
+            
+            try context.save()
+            print("Search(s) deleted successfully")
+        } catch {
+            print("Delete Error: \(error.localizedDescription)")
+        }
+    }
+
     
     
     func saveSearch(search: Search) {
@@ -52,8 +77,9 @@ final class SearchRepository: SearchRepositoryProtocol {
                     let search = Search(searchString: searchString)
                     searchs.append(search)
                 }
-                if searchs != nil {
-                    searchs = searchs.reversed()
+                
+                if !searchs.isEmpty {
+                    searchs = Array(searchs.reversed().prefix(5))
                 }
                 
                 return searchs

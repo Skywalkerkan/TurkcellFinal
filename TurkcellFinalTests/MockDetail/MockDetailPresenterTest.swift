@@ -63,6 +63,7 @@ final class DetailPresenterTests: XCTestCase {
         XCTAssertEqual(presenter.numberOfRowsInSection(section: presenterSection), 0)
 
         presenter.fetchWordOutput(.success(.response))
+        XCTAssertTrue(view.isInvokedHideLoading)
         XCTAssertFalse(view.isInvokedShowLoading)
         XCTAssertEqual(presenter.numberOfSection(), 5)
         XCTAssertEqual(presenter.numberOfRowsInSection(section: presenterSection), 4)

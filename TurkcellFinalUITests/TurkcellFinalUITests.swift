@@ -33,7 +33,7 @@ final class TurkcellFinalUITests: XCTestCase {
     func testKeyboardAndSearchButton(){
         let searchBarElement = app.otherElements["searchBar"]
         
-        XCTAssertTrue(searchBarElement.waitForExistence(timeout: 10), "Search bar should exist")
+        XCTAssertTrue(searchBarElement.waitForExistence(timeout: 5), "Search bar should exist")
         
         let searchButton = app.buttons["SearchButton"]
         let searchButtonFrameBefore = searchButton.frame

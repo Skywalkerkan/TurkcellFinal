@@ -73,11 +73,10 @@ extension HomePresenter: HomeInteractorOutputProtocol {
         switch result {
         case .success(let wordResults):
             self.wordResult = wordResults
-            view.getWordInfo()
             view.hideLoadingView()
-            router.navigate(.detail(self.wordResult))
             DispatchQueue.main.async {
                 self.interactor.saveWord(word: self.searchWord)
+                self.router.navigate(.detail(self.wordResult))
             }
         case .failure(let error):
             view.getError(error.localizedDescription)

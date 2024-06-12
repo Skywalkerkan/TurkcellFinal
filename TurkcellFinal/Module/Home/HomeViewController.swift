@@ -13,7 +13,6 @@ protocol HomeViewControllerProtocol: AnyObject {
     func reloadData()
     func hideLoadingView()
     func showLoadingView()
-    func getWordInfo()
     func getError(_ errorString: String)
 }
 
@@ -292,11 +291,6 @@ extension HomeViewController: HomeViewControllerProtocol {
         DispatchQueue.main.async {
             self.showAlert(with: "Alert", message: "We could not find your word please write a word appropriately")
         }
-    }
-    
-    
-    func getWordInfo() {
-
     }
     
     func setupTableView() {

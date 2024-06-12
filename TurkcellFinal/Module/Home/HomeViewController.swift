@@ -40,6 +40,7 @@ final class HomeViewController: BaseViewController {
           }
         searchBar.searchTextField.leftView?.tintColor = .gray
         searchBar.layer.zPosition = 2
+        searchBar.accessibilityIdentifier = "searchBar"
         return searchBar
     }()
     
@@ -88,7 +89,7 @@ final class HomeViewController: BaseViewController {
         return tableView
     }()
     
-    private lazy var searchButton: UIButton = {
+    lazy var searchButton: UIButton = {
         let searchButton = UIButton(type: .system)
         searchButton.backgroundColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 1)
         searchButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
@@ -102,6 +103,7 @@ final class HomeViewController: BaseViewController {
         searchButton.layer.masksToBounds = false     
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        searchButton.accessibilityIdentifier = "SearchButton"
         return searchButton
     }()
     

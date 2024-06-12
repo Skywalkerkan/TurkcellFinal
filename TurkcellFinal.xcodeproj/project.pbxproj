@@ -24,6 +24,7 @@
 		DE9666542C186C9C009D878D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9666532C186C9C009D878D /* StringExtension.swift */; };
 		DE9D3A7F2C19F75900DA3694 /* UIView + AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A7E2C19F75900DA3694 /* UIView + AddShadow.swift */; };
 		DE9D3A822C1A049800DA3694 /* DetailViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A812C1A049800DA3694 /* DetailViewFactory.swift */; };
+		DE9D3A852C1A456B00DA3694 /* MockHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A842C1A456B00DA3694 /* MockHomeViewController.swift */; };
 		DE9EB2F92C13245400999FA3 /* SynonymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2F82C13245400999FA3 /* SynonymCell.swift */; };
 		DE9EB2FB2C1329EB00999FA3 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */; };
 		DE9EB2FD2C133AEC00999FA3 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */; };
@@ -90,6 +91,7 @@
 		DE9666532C186C9C009D878D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		DE9D3A7E2C19F75900DA3694 /* UIView + AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + AddShadow.swift"; sourceTree = "<group>"; };
 		DE9D3A812C1A049800DA3694 /* DetailViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewFactory.swift; sourceTree = "<group>"; };
+		DE9D3A842C1A456B00DA3694 /* MockHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeViewController.swift; sourceTree = "<group>"; };
 		DE9EB2F82C13245400999FA3 /* SynonymCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCell.swift; sourceTree = "<group>"; };
 		DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
 		DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -253,6 +255,14 @@
 			path = DetailViewFactory;
 			sourceTree = "<group>";
 		};
+		DE9D3A832C1A455100DA3694 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				DE9D3A842C1A456B00DA3694 /* MockHomeViewController.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
 		DE9EB2F72C13243000999FA3 /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +352,7 @@
 		DEB3CFB32C08D7BB00002729 /* TurkcellFinalTests */ = {
 			isa = PBXGroup;
 			children = (
+				DE9D3A832C1A455100DA3694 /* Mock */,
 				DEB3CFB42C08D7BB00002729 /* TurkcellFinalTests.swift */,
 			);
 			path = TurkcellFinalTests;
@@ -585,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEB3CFB52C08D7BB00002729 /* TurkcellFinalTests.swift in Sources */,
+				DE9D3A852C1A456B00DA3694 /* MockHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

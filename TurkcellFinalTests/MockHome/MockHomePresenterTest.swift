@@ -8,12 +8,12 @@
 import XCTest
 @testable import TurkcellFinal
 
-final class HomePresenterTest: XCTestCase {
+final class HomePresenterTests: XCTestCase {
     
     
     var presenter: HomePresenter!
-    var view: MockViewController!
-    var interactor: MockInteractor!
+    var view: MockHomeViewController!
+    var interactor: MockHomeInteractor!
     var router: MockHomeRouter!
     
 
@@ -42,6 +42,8 @@ final class HomePresenterTest: XCTestCase {
     
     func testSearchButtonClickedAndFetchWord() {
         XCTAssertFalse(view.isInvokedHideLoading)
+        XCTAssertFalse(view.isInvokedShowLoading)
+
         presenter.searchButtonClicked(word: "home")
         XCTAssertTrue(view.isInvokedShowLoading)
     }
@@ -49,7 +51,7 @@ final class HomePresenterTest: XCTestCase {
     func testFetchWordOutput() {
         XCTAssertFalse(view.isInvokedHideLoading)
         XCTAssertFalse(view.isInvokedShowLoading)
-        
+
         presenter.fetchWordOutput(.success(.response))
         XCTAssertFalse(view.isInvokedShowLoading)
         XCTAssertTrue(view.isInvokedHideLoading)
@@ -60,7 +62,7 @@ final class HomePresenterTest: XCTestCase {
 extension [WordResult] {
     
     static var response: [WordResult] {
-        let bundle = Bundle(for: HomePresenterTest.self)
+        let bundle = Bundle(for: HomePresenterTests.self)
         let path = bundle.path(forResource: "WordMock", ofType: "json")!
         let file = try! String(contentsOfFile: path)
         let data = file.data(using: .utf8)!

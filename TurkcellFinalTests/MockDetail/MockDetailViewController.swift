@@ -8,10 +8,7 @@
 import Foundation
 @testable import TurkcellFinal
 
-final class MockHomeViewController: HomeViewControllerProtocol {
-    func reloadData() {
-        
-    }
+final class MockDetailViewController: DetailViewControllerProtocol {
     
     var isInvokedShowLoading = false
     var invokedShowLoadingCount = 0
@@ -27,10 +24,6 @@ final class MockHomeViewController: HomeViewControllerProtocol {
     func hideLoadingView() {
         isInvokedHideLoading = true
         invokedHideLoadingCount += 1
-    }
-    
-    func setupTableView() {
-        
     }
 
     func setupSearchController() {
@@ -49,6 +42,18 @@ final class MockHomeViewController: HomeViewControllerProtocol {
         invokedSetTitle = true
         invokedSetTitleCount += 1
         invokedSetTitleParamters = (title, ())
+    }
+    
+    func setupCollectionViews() {
+        
+    }
+    
+    func setupTableView() {
+        
+    }
+    
+    func reloadData() {
+        
     }
     
     

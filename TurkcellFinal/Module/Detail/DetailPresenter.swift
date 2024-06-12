@@ -46,9 +46,9 @@ final class DetailPresenter {
 
     unowned var view: DetailViewControllerProtocol
     let interactor: DetailInteractorProtocol
-    let router: DetailRouter
+    let router: DetailRouterProtocol
     
-    init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouter) {
+    init(view: DetailViewControllerProtocol, interactor: DetailInteractorProtocol, router: DetailRouterProtocol) {
         self.view = view
         self.interactor = interactor
         self.router = router

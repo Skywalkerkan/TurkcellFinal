@@ -8,7 +8,7 @@
 import Foundation
 @testable import TurkcellFinal
 
-final class MockInteractor: HomeInteractorProtocol {
+final class MockHomeInteractor: HomeInteractorProtocol {
 
     
     

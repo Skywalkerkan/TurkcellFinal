@@ -12,7 +12,7 @@ final class MockHomeRouter: HomeRouterProtocol {
     
     func navigate(_ navigate: TurkcellFinal.HomeRoutes) {
         switch navigate {
-        case .detail(let source):
+        case .detail(_):
             return
         }
     }

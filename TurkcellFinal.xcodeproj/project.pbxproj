@@ -25,10 +25,15 @@
 		DE9D3A7F2C19F75900DA3694 /* UIView + AddShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A7E2C19F75900DA3694 /* UIView + AddShadow.swift */; };
 		DE9D3A822C1A049800DA3694 /* DetailViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A812C1A049800DA3694 /* DetailViewFactory.swift */; };
 		DE9D3A852C1A456B00DA3694 /* MockHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A842C1A456B00DA3694 /* MockHomeViewController.swift */; };
-		DE9D3A872C1A476200DA3694 /* MockInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A862C1A476200DA3694 /* MockInteractor.swift */; };
+		DE9D3A872C1A476200DA3694 /* MockHomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A862C1A476200DA3694 /* MockHomeInteractor.swift */; };
 		DE9D3A892C1A4D3B00DA3694 /* MockHomePresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A882C1A4D3B00DA3694 /* MockHomePresenterTest.swift */; };
 		DE9D3A8B2C1A4DC500DA3694 /* MockHomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A8A2C1A4DC500DA3694 /* MockHomeRouter.swift */; };
 		DE9D3A8F2C1A50AD00DA3694 /* WordMock.json in Resources */ = {isa = PBXBuildFile; fileRef = DE9D3A8E2C1A50AD00DA3694 /* WordMock.json */; };
+		DE9D3A932C1A550F00DA3694 /* MockDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A922C1A550F00DA3694 /* MockDetailPresenterTest.swift */; };
+		DE9D3A952C1A554100DA3694 /* MockDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A942C1A554100DA3694 /* MockDetailRouter.swift */; };
+		DE9D3A972C1A555500DA3694 /* MockDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A962C1A555500DA3694 /* MockDetailInteractor.swift */; };
+		DE9D3A992C1A557200DA3694 /* MockDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9D3A982C1A557200DA3694 /* MockDetailViewController.swift */; };
+		DE9D3A9D2C1A562100DA3694 /* SynonymMock.json in Resources */ = {isa = PBXBuildFile; fileRef = DE9D3A9C2C1A562100DA3694 /* SynonymMock.json */; };
 		DE9EB2F92C13245400999FA3 /* SynonymCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2F82C13245400999FA3 /* SynonymCell.swift */; };
 		DE9EB2FB2C1329EB00999FA3 /* MeaningCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */; };
 		DE9EB2FD2C133AEC00999FA3 /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */; };
@@ -96,10 +101,15 @@
 		DE9D3A7E2C19F75900DA3694 /* UIView + AddShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + AddShadow.swift"; sourceTree = "<group>"; };
 		DE9D3A812C1A049800DA3694 /* DetailViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewFactory.swift; sourceTree = "<group>"; };
 		DE9D3A842C1A456B00DA3694 /* MockHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeViewController.swift; sourceTree = "<group>"; };
-		DE9D3A862C1A476200DA3694 /* MockInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInteractor.swift; sourceTree = "<group>"; };
+		DE9D3A862C1A476200DA3694 /* MockHomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeInteractor.swift; sourceTree = "<group>"; };
 		DE9D3A882C1A4D3B00DA3694 /* MockHomePresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomePresenterTest.swift; sourceTree = "<group>"; };
 		DE9D3A8A2C1A4DC500DA3694 /* MockHomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHomeRouter.swift; sourceTree = "<group>"; };
 		DE9D3A8E2C1A50AD00DA3694 /* WordMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = WordMock.json; sourceTree = "<group>"; };
+		DE9D3A922C1A550F00DA3694 /* MockDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailPresenterTest.swift; sourceTree = "<group>"; };
+		DE9D3A942C1A554100DA3694 /* MockDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailRouter.swift; sourceTree = "<group>"; };
+		DE9D3A962C1A555500DA3694 /* MockDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailInteractor.swift; sourceTree = "<group>"; };
+		DE9D3A982C1A557200DA3694 /* MockDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailViewController.swift; sourceTree = "<group>"; };
+		DE9D3A9C2C1A562100DA3694 /* SynonymMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = SynonymMock.json; sourceTree = "<group>"; };
 		DE9EB2F82C13245400999FA3 /* SynonymCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynonymCell.swift; sourceTree = "<group>"; };
 		DE9EB2FA2C1329EB00999FA3 /* MeaningCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeaningCell.swift; sourceTree = "<group>"; };
 		DE9EB2FC2C133AEC00999FA3 /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -267,11 +277,22 @@
 			isa = PBXGroup;
 			children = (
 				DE9D3A842C1A456B00DA3694 /* MockHomeViewController.swift */,
-				DE9D3A862C1A476200DA3694 /* MockInteractor.swift */,
+				DE9D3A862C1A476200DA3694 /* MockHomeInteractor.swift */,
 				DE9D3A882C1A4D3B00DA3694 /* MockHomePresenterTest.swift */,
 				DE9D3A8A2C1A4DC500DA3694 /* MockHomeRouter.swift */,
 			);
 			path = MockHome;
+			sourceTree = "<group>";
+		};
+		DE9D3A912C1A54F000DA3694 /* MockDetail */ = {
+			isa = PBXGroup;
+			children = (
+				DE9D3A982C1A557200DA3694 /* MockDetailViewController.swift */,
+				DE9D3A962C1A555500DA3694 /* MockDetailInteractor.swift */,
+				DE9D3A922C1A550F00DA3694 /* MockDetailPresenterTest.swift */,
+				DE9D3A942C1A554100DA3694 /* MockDetailRouter.swift */,
+			);
+			path = MockDetail;
 			sourceTree = "<group>";
 		};
 		DE9EB2F72C13243000999FA3 /* DetailCell */ = {
@@ -363,9 +384,11 @@
 		DEB3CFB32C08D7BB00002729 /* TurkcellFinalTests */ = {
 			isa = PBXGroup;
 			children = (
+				DE9D3A912C1A54F000DA3694 /* MockDetail */,
 				DE9D3A832C1A455100DA3694 /* MockHome */,
 				DEB3CFB42C08D7BB00002729 /* TurkcellFinalTests.swift */,
 				DE9D3A8E2C1A50AD00DA3694 /* WordMock.json */,
+				DE9D3A9C2C1A562100DA3694 /* SynonymMock.json */,
 			);
 			path = TurkcellFinalTests;
 			sourceTree = "<group>";
@@ -544,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE9D3A8F2C1A50AD00DA3694 /* WordMock.json in Resources */,
+				DE9D3A9D2C1A562100DA3694 /* SynonymMock.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,11 +632,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE9D3A872C1A476200DA3694 /* MockInteractor.swift in Sources */,
+				DE9D3A872C1A476200DA3694 /* MockHomeInteractor.swift in Sources */,
 				DE9D3A892C1A4D3B00DA3694 /* MockHomePresenterTest.swift in Sources */,
 				DE9D3A8B2C1A4DC500DA3694 /* MockHomeRouter.swift in Sources */,
 				DEB3CFB52C08D7BB00002729 /* TurkcellFinalTests.swift in Sources */,
 				DE9D3A852C1A456B00DA3694 /* MockHomeViewController.swift in Sources */,
+				DE9D3A972C1A555500DA3694 /* MockDetailInteractor.swift in Sources */,
+				DE9D3A952C1A554100DA3694 /* MockDetailRouter.swift in Sources */,
+				DE9D3A932C1A550F00DA3694 /* MockDetailPresenterTest.swift in Sources */,
+				DE9D3A992C1A557200DA3694 /* MockDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -51,10 +51,37 @@ final class HomeViewController: BaseViewController {
         return view
     }()
     
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Handy Dictionary"
+        label.font = UIFont.boldSystemFont(ofSize: 32)
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let noRecentSearchLabel: UILabel = {
+        let label = UILabel()
+        label.text = "There is no recent search"
+        label.isHidden = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let noRecentSearchImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "nosearch")
+        imageView.isHidden = false
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private let tableView: SelfSizingTableView = {
         let tableView = SelfSizingTableView()
         tableView.backgroundColor = .white
         tableView.layer.cornerRadius = 12
+        tableView.layer.borderWidth = 1
+        tableView.layer.borderColor =  UIColor.systemGray4.cgColor
         tableView.sectionHeaderTopPadding = 0
         tableView.bouncesVertically = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,10 +90,16 @@ final class HomeViewController: BaseViewController {
     
     private lazy var searchButton: UIButton = {
         let searchButton = UIButton(type: .system)
-        searchButton.backgroundColor = .lightGray
+        searchButton.backgroundColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 1)
+        searchButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         searchButton.setTitle("Search", for: .normal)
         searchButton.setTitleColor(.white, for: .normal)
-        searchButton.layer.cornerRadius = 10
+        searchButton.layer.cornerRadius = 8
+        searchButton.layer.shadowColor = UIColor.black.cgColor
+        searchButton.layer.shadowOpacity = 0.7
+        searchButton.layer.shadowOffset = CGSize(width: 1, height: 1)
+        searchButton.layer.shadowRadius = 4
+        searchButton.layer.masksToBounds = false     
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
         return searchButton
@@ -75,7 +108,6 @@ final class HomeViewController: BaseViewController {
     @objc private func searchButtonClicked(){
         searchBar.resignFirstResponder()
         presenter.searchButtonClicked(word: chosenText)
-        print("evet devamke")
     }
     
     var presenter: HomePresenterProtocol!
@@ -135,14 +167,21 @@ final class HomeViewController: BaseViewController {
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
         
+        contentView.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
+        ])
+        
+                
         navigationController?.navigationBar.isHidden = true
         
         view.addSubview(searchBar)
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+            searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            searchBar.heightAnchor.constraint(equalToConstant: 50)
+            searchBar.heightAnchor.constraint(equalToConstant: 60)
         ])
         
         view.addSubview(tableView)
@@ -150,6 +189,20 @@ final class HomeViewController: BaseViewController {
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+
+        ])
+        
+        contentView.addSubview(noRecentSearchLabel)
+        contentView.addSubview(noRecentSearchImageView)
+        
+        NSLayoutConstraint.activate([
+            noRecentSearchImageView.widthAnchor.constraint(equalToConstant: 130),
+            noRecentSearchImageView.heightAnchor.constraint(equalToConstant: 130),
+            noRecentSearchImageView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 70),
+            noRecentSearchImageView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            
+            noRecentSearchLabel.topAnchor.constraint(equalTo: noRecentSearchImageView.bottomAnchor, constant: 0),
+            noRecentSearchLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
 
         ])
         
@@ -185,8 +238,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewController: UISearchBarDelegate {
-    
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         UIView.animate(withDuration: 0.3) {
             var frameSearchBar = self.searchBar.frame
@@ -257,6 +309,13 @@ extension HomeViewController: HomeViewControllerProtocol {
     
     func reloadData() {
         DispatchQueue.main.async {
+            if self.presenter.fetchedSearches.isEmpty {
+                self.noRecentSearchLabel.isHidden = false
+                self.noRecentSearchImageView.isHidden = false
+            }else{
+                self.noRecentSearchLabel.isHidden = true
+                self.noRecentSearchImageView.isHidden = true
+            }
             self.tableView.reloadData()
         }
     }

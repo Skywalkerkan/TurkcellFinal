@@ -31,14 +31,14 @@ protocol DetailPresenterProtocol {
 }
 
 final class DetailPresenter {
-    
+        
     private var filteredPartOfSpeech = ["X"]
     
     private var synonyms = [Synonym]()
     private var selectedCells = [String]()
     private var unselectedCells = [String]()
     private var isItFirstTime = true
-    
+    private var isErrored: Bool = false
     private var allPartOfSpeech = [Meaning]()
     private var isFiltering = false
     var sourceDetail: [WordResult]?
@@ -127,7 +127,6 @@ extension DetailPresenter: DetailPresenterProtocol {
 
     }
     
-    
     func numberOfSection() -> Int {
         if isFiltering {
             if let meaningCount = filteredSourceDetail?.first?.meanings?.count {
@@ -145,8 +144,14 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
     
     func cellForRowAt(index: Int) -> Meaning? {
+                
+        if isFiltering {
+            return filteredSourceDetail?.first?.meanings?[index]
+        } else {
+            return sourceDetail?.first?.meanings?[index]
+        }
         
-        if isFiltering{
+        /*if isFiltering{
             if let meaning = filteredSourceDetail?.first?.meanings?[index]{
                 return meaning
             }else{
@@ -158,10 +163,9 @@ extension DetailPresenter: DetailPresenterProtocol {
             }else{
                 return nil
             }
-        }
+        }*/
     }
 
-    
     func viewDidload(word: String?, source: [WordResult]?) {
         view.setupTableView()
         view.setupCollectionViews()
@@ -184,6 +188,9 @@ extension DetailPresenter: DetailPresenterProtocol {
         if !selectedCells.contains(selectedPhrase ?? ""){
             selectedCells.append(selectedPhrase ?? "")
         }
+        
+        //Ternary
+     //   isFiltering = !selectedCells.isEmpty
         
         if !selectedCells.isEmpty {
             isFiltering = true
@@ -221,7 +228,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         isItFirstTime = false
     }
     
-    func filterForWord(partOfSpeechList: [String]) {
+   /* func filterForWord(partOfSpeechList: [String]) {
         guard !partOfSpeechList.isEmpty, let sourceDetail = sourceDetail else {
             return
         }
@@ -234,7 +241,41 @@ extension DetailPresenter: DetailPresenterProtocol {
 
         filteredSourceDetail = filteredResults
         
-    }
+    }*/
+    func filterForWord(partOfSpeechList: [String]) {
+            guard !partOfSpeechList.isEmpty, let sourceDetail = sourceDetail else {
+                return
+            }
+
+            let filteredResults = sourceDetail.map { wordResult -> WordResult in
+                var updatedWordResult = wordResult
+                updatedWordResult.meanings = wordResult.meanings?.filter { partOfSpeechList.contains($0.partOfSpeech ?? "") }
+                return updatedWordResult
+            }
+
+            let sortedFilteredResults = filteredResults.map { wordResult -> WordResult in
+                var updatedWordResult = wordResult
+                updatedWordResult.meanings?.sort { meaning1, meaning2 in
+                    guard let partOfSpeech1 = meaning1.partOfSpeech, let partOfSpeech2 = meaning2.partOfSpeech else {
+                        return false
+                    }
+                    return partOfSpeechList.firstIndex(of: partOfSpeech1)! < partOfSpeechList.firstIndex(of: partOfSpeech2)!
+                }
+                return updatedWordResult
+            }
+
+            let sortedWordResults = sortedFilteredResults.sorted { wordResult1, wordResult2 in
+                guard let meanings1 = wordResult1.meanings, let meanings2 = wordResult2.meanings else {
+                    return false
+                }
+                guard let firstMeaning1 = meanings1.first?.partOfSpeech, let firstMeaning2 = meanings2.first?.partOfSpeech else {
+                    return false
+                }
+                return partOfSpeechList.firstIndex(of: firstMeaning1)! < partOfSpeechList.firstIndex(of: firstMeaning2)!
+            }
+
+            filteredSourceDetail = sortedWordResults
+        }
     
     var allSynonyms: [Synonym]? {
         return synonyms
@@ -250,25 +291,29 @@ extension DetailPresenter: DetailPresenterProtocol {
 
 extension DetailPresenter: DetailInteractorOutputProtocol {
     
+    func renewData(){
+        selectedCells.removeAll()
+        unselectedCells.removeAll()
+        isFiltering = false
+        isItFirstTime = true
+        filteredPartOfSpeech = ["X"]
+        
+        if let meanings = sourceDetail?.first?.meanings {
+            unselectedCells.append(contentsOf: meanings.compactMap { $0.partOfSpeech })
+        }
+    }
+    
     func fetchWordOutput(_ result: Result<[WordResult], NetworkError>) {
         switch result {
         case .success(let wordResult):
             view.hideLoadingView()
             self.sourceDetail = wordResult
-            
-            selectedCells.removeAll()
-            unselectedCells.removeAll()
-            isFiltering = false
-            isItFirstTime = true
-            filteredPartOfSpeech = ["X"]
-            
-            if let meanings = sourceDetail?.first?.meanings {
-                unselectedCells.append(contentsOf: meanings.compactMap { $0.partOfSpeech })
-            }
-            
+            renewData()
             view.reloadData()
         case .failure(let error):
-            print(error)
+            view.hideLoadingView()
+            isErrored = true
+            view.getError(error.localizedDescription)
         }
     }
 
@@ -276,10 +321,14 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
     func fetchOutputSynonms(_ result: Result<[Synonym], NetworkError>) {
         switch result {
         case .success(let synonyms):
-            self.synonyms = Array(synonyms.prefix(5))
-            view.reloadData()
+            if !isErrored{
+                self.synonyms = Array(synonyms.prefix(5))
+                view.reloadData()
+            }
+            isErrored = false
         case .failure(let error):
-            print("hata alıyom")
+            view.hideLoadingView()
+            view.getError(error.localizedDescription)
         }
     }
 }

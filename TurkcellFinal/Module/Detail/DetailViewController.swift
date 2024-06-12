@@ -14,6 +14,7 @@ protocol DetailViewControllerProtocol: AnyObject {
     func reloadData()
     func hideLoadingView()
     func showLoadingView()
+    func getError(_ error: String)
 }
 
 
@@ -62,11 +63,7 @@ final class DetailViewController: BaseViewController {
     private lazy var soundButton: UIButton = {
         let button = UIButton(type: .system)
         button.layer.cornerRadius = 20
-        button.layer.shadowColor = UIColor.systemGray.cgColor
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowOffset = CGSize(width: 1, height: 1)
-        button.layer.shadowRadius = 4
-        button.layer.masksToBounds = false
+        button.applyShadow()
         let image = UIImage(systemName: "person.wave.2")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -292,7 +289,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         switch collectionView {
         case meaningsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeaningCell.identifier, for: indexPath) as! MeaningCell
-            
             if presenter.isItFiltering && indexPath.row == 0{
                 cell.contentView.backgroundColor = UIColor(red: 250/255, green: 80/255, blue: 80/255, alpha: 0.8)
                 cell.contentView.layer.borderColor = UIColor.clear.cgColor
@@ -307,7 +303,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
                   cell.contentView.backgroundColor = .white
                   cell.meaningLabel.textColor = .black
               }
-            
             cell.meaningLabel.text = presenter.partOfSpeech(index: indexPath.row)
             return cell
         case synonymCollectionView:
@@ -363,7 +358,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         
         cell.partOfSpeechLabel.text = "\(indexPath.row+1)"
 
-        
         if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions,
            let _ = definitions[indexPath.row].example {
             let definition = definitions[indexPath.row]
@@ -379,84 +373,36 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-           if let headerView = view as? UITableViewHeaderFooterView {
-               headerView.layer.cornerRadius = 10
-               headerView.clipsToBounds = true
-           }
-       }
-       
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-           if let footerView = view as? UITableViewHeaderFooterView {
-               footerView.layer.cornerRadius = 10
-               footerView.clipsToBounds = true
-           }
-       }
-    
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-            return 48
-        }else {
-            return 48
-        }
+        return 48
     }
-        
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        let view = UIView()
-        view.backgroundColor = .white
-        let partOfSpeechLabel = UILabel()
-        partOfSpeechLabel.text = "ok"
-        partOfSpeechLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        partOfSpeechLabel.textColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 1)
-        partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
-        let imageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill")?
-            .withRenderingMode(.alwaysOriginal)
-            .withTintColor(.black))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
+        let view = DetailInfoFactoryView.createHeaderView()
+        let partOfSpeechLabel = DetailInfoFactoryView.createPartOfSpeechLabel()
+        let imageView = DetailInfoFactoryView.createImageView()
+
         view.addSubview(imageView)
         view.addSubview(partOfSpeechLabel)
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 24),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-            imageView.heightAnchor.constraint(equalToConstant: 15),
-            imageView.widthAnchor.constraint(equalToConstant: 12),
-            partOfSpeechLabel.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
-            partOfSpeechLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 8),
-        ])
+        DetailInfoFactoryView.setupConstraints(for: view, imageView: imageView, label: partOfSpeechLabel)
 
-        if section == 0 {
-            view.layer.cornerRadius = 12
-            view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            let partOfSpeech = presenter.cellForRowAt(index: section)
-            partOfSpeechLabel.text = partOfSpeech?.partOfSpeech
-            return view
-        }else{
-            view.layer.cornerRadius = 12
-            view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-            let partOfSpeech = presenter.cellForRowAt(index: section)
-            partOfSpeechLabel.text = partOfSpeech?.partOfSpeech
-            return view
-        }
+        view.layer.cornerRadius = 12
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        let partOfSpeech = presenter.cellForRowAt(index: section)
+        partOfSpeechLabel.text = partOfSpeech?.partOfSpeech
+        
+        return view
     }
+
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 20
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 12
-        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-        return view
+        return DetailInfoFactoryView.createFooterView()
     }
-        
-    
 }
-
 
 extension DetailViewController: DetailViewControllerProtocol {
     
@@ -474,13 +420,11 @@ extension DetailViewController: DetailViewControllerProtocol {
         }
     }
     
-    
     func setupTableView() {
         tableView.register(InfoCell.self, forCellReuseIdentifier: InfoCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
     
     func setupCollectionViews() {
         synonymCollectionView.register(SynonymCell.self, forCellWithReuseIdentifier: SynonymCell.identifier)
@@ -502,4 +446,9 @@ extension DetailViewController: DetailViewControllerProtocol {
         }
     }
     
+    func getError(_ error: String) {
+        DispatchQueue.main.async {
+            self.showAlert(with: "Alert", message: "We could not find chosen word.")
+        }
+    }
 }

@@ -27,15 +27,21 @@ class SynonymCell: UICollectionViewCell {
     
     private func setupViews(){
         
-        contentView.layer.cornerRadius = 4
+        contentView.layer.cornerRadius = 18
+        contentView.backgroundColor = .white
         contentView.layer.borderWidth = 1
-        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderColor = UIColor.gray.cgColor
+        contentView.layer.shadowColor = UIColor.darkGray.cgColor
+        contentView.layer.shadowOpacity = 0.7
+        contentView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        contentView.layer.shadowRadius = 2
+        contentView.layer.masksToBounds = false
         
         contentView.addSubview(synonymLabel)
         NSLayoutConstraint.activate([
             synonymLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            synonymLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            synonymLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            synonymLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            synonymLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             synonymLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
         ])
     }

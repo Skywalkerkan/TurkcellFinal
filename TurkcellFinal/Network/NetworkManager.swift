@@ -47,7 +47,6 @@ final class NetworkManager {
 extension NetworkManager: NetworkService {
     
     func performRequest<T>(urlRequest: URLRequest, completion: @escaping (Result<T, NetworkError>) -> Void) where T : Decodable {
-        print(T.self)
         let task = session.dataTask(with: urlRequest) { data, response, error in
             
             if let error {

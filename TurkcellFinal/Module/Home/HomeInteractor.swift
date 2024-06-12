@@ -32,14 +32,12 @@ extension HomeInteractor: HomeInteractorProtocol {
     func deleteWord(word: String?) {
         let searchRepository = SearchRepository()
         searchRepository.deleteSameSearch(search: Search(searchString: word))
-        print("Silindi")
     }
     
     func saveWord(word: String?) {
         deleteWord(word: word)
         let searchRepository = SearchRepository()
         searchRepository.saveSearch(search: Search(searchString: word))
-        print("kaydedildi")
     }
     
     

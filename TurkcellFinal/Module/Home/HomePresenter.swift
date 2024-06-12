@@ -38,7 +38,6 @@ extension HomePresenter: HomePresenterProtocol {
         view.showLoadingView()
         searchWord = word?.capitalizingFirstLetter()
         interactor.fetchWord(word: word)
-        print("kelime: \(word)")
     }
     
     var fetchedWordInfo: [WordResult] {

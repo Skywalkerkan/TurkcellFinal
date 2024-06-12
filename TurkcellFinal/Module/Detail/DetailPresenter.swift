@@ -10,7 +10,6 @@ import Foundation
 protocol DetailPresenterProtocol {
     func viewDidload(word: String?, source: [WordResult]?)
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?)
-    var allSynonyms: [Synonym]? { get }
 
     //TOPCOLLECTİONVİEW
     func partOfSpeechCount() -> Int
@@ -24,6 +23,11 @@ protocol DetailPresenterProtocol {
     func numberOfSection() -> Int
     func numberOfRowsInSection(section: Int) -> Int
     func cellForRowAt(index: Int) -> Meaning?
+    
+    //SynonymCollecitonView
+    var allSynonyms: [Synonym]? { get }
+    func didSelectSynonym(_ synonym: String)
+    
 }
 
 final class DetailPresenter {
@@ -37,7 +41,7 @@ final class DetailPresenter {
     
     private var allPartOfSpeech = [Meaning]()
     private var isFiltering = false
-    private var sourceDetail: [WordResult]?
+    var sourceDetail: [WordResult]?
     private var filteredSourceDetail: [WordResult]?
 
     unowned var view: DetailViewControllerProtocol
@@ -172,7 +176,7 @@ extension DetailPresenter: DetailPresenterProtocol {
             }
         }
                 
-        view.reloadData()
+      //  view.reloadData()
     }
 
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?) {
@@ -236,14 +240,43 @@ extension DetailPresenter: DetailPresenterProtocol {
         return synonyms
     }
     
+    func didSelectSynonym(_ synonym: String) {
+        view.showLoadingView()
+        interactor.fetchWord(word: synonym)
+        interactor.fetchSynonms(word: synonym)
+    }
+    
 }
 
 extension DetailPresenter: DetailInteractorOutputProtocol {
     
+    func fetchWordOutput(_ result: Result<[WordResult], NetworkError>) {
+        switch result {
+        case .success(let wordResult):
+            view.hideLoadingView()
+            self.sourceDetail = wordResult
+            
+            selectedCells.removeAll()
+            unselectedCells.removeAll()
+            isFiltering = false
+            isItFirstTime = true
+            filteredPartOfSpeech = ["X"]
+            
+            if let meanings = sourceDetail?.first?.meanings {
+                unselectedCells.append(contentsOf: meanings.compactMap { $0.partOfSpeech })
+            }
+            
+            view.reloadData()
+        case .failure(let error):
+            print(error)
+        }
+    }
+
+    
     func fetchOutputSynonms(_ result: Result<[Synonym], NetworkError>) {
         switch result {
         case .success(let synonyms):
-            self.synonyms = synonyms
+            self.synonyms = Array(synonyms.prefix(5))
             view.reloadData()
         case .failure(let error):
             print("hata alıyom")

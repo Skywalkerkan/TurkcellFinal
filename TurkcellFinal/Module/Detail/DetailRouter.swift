@@ -32,3 +32,10 @@ final class DetailRouter {
 }
 
 
+extension DetailRouter: DetailRouterProtocol {
+    
+    func navigate() {
+        
+    }
+    
+}

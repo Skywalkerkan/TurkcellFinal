@@ -12,6 +12,8 @@ protocol DetailViewControllerProtocol: AnyObject {
     func setupTableView()
     func setupCollectionViews()
     func reloadData()
+    func hideLoadingView()
+    func showLoadingView()
 }
 
 
@@ -115,11 +117,23 @@ final class DetailViewController: BaseViewController {
     }()
     
     
+    private let synonymLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.text = "Synonyms"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     private let synonymCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = .clear
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -141,6 +155,7 @@ final class DetailViewController: BaseViewController {
     
     private func setupViews() {
         
+        view.backgroundColor = .systemGray6
         
         let backImage = UIImage(systemName: "arrow.left")?.withRenderingMode(.alwaysOriginal).withTintColor(.systemCyan)
         navigationController?.navigationBar.backIndicatorImage = backImage
@@ -196,17 +211,27 @@ final class DetailViewController: BaseViewController {
         let tableViewWrapper = UIView()
         tableViewWrapper.addSubview(tableView)
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: tableViewWrapper.leadingAnchor, constant: 16), // Sol boşluk
+            tableView.leadingAnchor.constraint(equalTo: tableViewWrapper.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: tableViewWrapper.trailingAnchor, constant: -16),
             tableView.topAnchor.constraint(equalTo: tableViewWrapper.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: tableViewWrapper.bottomAnchor)
         ])
         stackView.addArrangedSubview(tableViewWrapper)
-
+        stackView.setCustomSpacing(16, after: tableViewWrapper)
         
         
+        let synonymLabelWrapper = UIView()
+        synonymLabelWrapper.addSubview(synonymLabel)
+        NSLayoutConstraint.activate([
+            synonymLabel.leadingAnchor.constraint(equalTo: synonymLabelWrapper.leadingAnchor, constant: 16),
+            synonymLabel.trailingAnchor.constraint(equalTo: synonymLabelWrapper.trailingAnchor, constant: -16),
+            synonymLabel.topAnchor.constraint(equalTo: synonymLabelWrapper.topAnchor),
+            synonymLabel.bottomAnchor.constraint(equalTo: synonymLabelWrapper.bottomAnchor)
+        ])
+        stackView.addArrangedSubview(synonymLabelWrapper)
+                
         stackView.addArrangedSubview(synonymCollectionView)
-        synonymCollectionView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        synonymCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         tableView.rowHeight = UITableView.automaticDimension
     }
@@ -310,7 +335,9 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             }
           
         case synonymCollectionView:
-            break
+            if let synonym = presenter.allSynonyms?[indexPath.row].word {
+                presenter.didSelectSynonym(synonym)
+            }
         default:
             break
         }
@@ -340,10 +367,12 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions,
            let _ = definitions[indexPath.row].example {
             let definition = definitions[indexPath.row]
-            cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition)
+            let index = "\(indexPath.row+1)  "
+            cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition, index: index)
         }else{
             if let definition = presenter.cellForRowAt(index: indexPath.section)?.definitions {
-                cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition[indexPath.row])
+                let index = "\(indexPath.row+1)  "
+                cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition[indexPath.row], index: index)
             }
         }
 
@@ -379,7 +408,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         view.backgroundColor = .white
         let partOfSpeechLabel = UILabel()
         partOfSpeechLabel.text = "ok"
-        partOfSpeechLabel.font = UIFont.boldSystemFont(ofSize: 22)
+        partOfSpeechLabel.font = UIFont.boldSystemFont(ofSize: 24)
         partOfSpeechLabel.textColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 1)
         partOfSpeechLabel.translatesAutoresizingMaskIntoConstraints = false
         let imageView = UIImageView(image: UIImage(systemName: "arrowtriangle.right.fill")?
@@ -431,6 +460,21 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension DetailViewController: DetailViewControllerProtocol {
     
+    func hideLoadingView() {
+        DispatchQueue.main.async {
+            self.hideLoading()
+            let topOffset = -self.scrollView.safeAreaInsets.top
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: topOffset), animated: true)
+        }
+    }
+    
+    func showLoadingView() {
+        DispatchQueue.main.async {
+            self.showLoading()
+        }
+    }
+    
+    
     func setupTableView() {
         tableView.register(InfoCell.self, forCellReuseIdentifier: InfoCell.identifier)
         tableView.delegate = self
@@ -450,6 +494,8 @@ extension DetailViewController: DetailViewControllerProtocol {
     
     func reloadData() {
         DispatchQueue.main.async {
+            self.wordLabel.text = self.presenter.sourceDetail?.first?.word
+            self.pronounceLabel.text = self.presenter.sourceDetail?.first?.phonetic
             self.tableView.reloadData()
             self.meaningsCollectionView.reloadData()
             self.synonymCollectionView.reloadData()

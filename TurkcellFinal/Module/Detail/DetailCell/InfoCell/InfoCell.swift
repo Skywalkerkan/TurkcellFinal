@@ -19,7 +19,7 @@ class InfoCell: UITableViewCell {
     let partOfSpeechLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -30,6 +30,7 @@ class InfoCell: UITableViewCell {
         let label = UILabel()
         label.text = "Labelcık"
         label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.numberOfLines = 0
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -48,6 +49,7 @@ class InfoCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,7 +82,7 @@ class InfoCell: UITableViewCell {
     
     private func setupViews(){
                 
-        contentView.addSubview(partOfSpeechLabel)
+      //  contentView.addSubview(partOfSpeechLabel)
         contentView.addSubview(definitionLabel)
         contentView.addSubview(stackView)
 
@@ -90,8 +92,8 @@ class InfoCell: UITableViewCell {
             partOfSpeechLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             partOfSpeechLabel.heightAnchor.constraint(equalToConstant: 40),*/
             
-            partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
-            partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+           // partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
+            //partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             
             definitionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             definitionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
@@ -157,13 +159,13 @@ extension InfoCell: InfoCellProtocol {
     
     func setDefinition(_ definition: String) {
         
-        definitionLabel.text = "    " + definition
+        definitionLabel.text = definition
         
     }
     
     func setExample(_ example: String?) {
         if let example = example {
-            exampleLabel.text = "    " + example
+            exampleLabel.text = "     " + example
             exampleImageView.isHidden = false
         }else{
             exampleImageView.isHidden = true

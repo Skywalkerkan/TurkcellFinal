@@ -113,7 +113,6 @@ extension API {
             
             if let url = URL(string: fullUrlString) {
                 urlRequest.url = url
-                print(urlRequest)
                 service.performRequest(urlRequest: urlRequest, completion: completion)
             } else {
                 completion(.failure(.invalidRequest))

@@ -15,10 +15,12 @@ final class InfoCellPresenter {
     
     weak var view: InfoCellProtocol?
     private let definition: Definition
+    private let index: String
     
-    init(view: InfoCellProtocol?, definition: Definition) {
+    init(view: InfoCellProtocol?, definition: Definition, index: String) {
         self.view = view
         self.definition = definition
+        self.index = index
     }
     
 }
@@ -29,7 +31,8 @@ extension InfoCellPresenter: InfoCellPresenterProtocol {
         
         
         if let definition = definition.definition {
-            view?.setDefinition(definition)
+            let indexAndDefinition = index + definition
+            view?.setDefinition(indexAndDefinition)
         }
         
         view?.setExample(definition.example)

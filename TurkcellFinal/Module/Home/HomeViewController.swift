@@ -161,61 +161,47 @@ final class HomeViewController: BaseViewController {
         view.backgroundColor = .systemGray6
         
         view.addSubview(contentView)
+        view.addSubview(searchBar)
+        view.addSubview(tableView)
+        view.addSubview(searchButton)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(noRecentSearchLabel)
+        contentView.addSubview(noRecentSearchImageView)
+
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: view.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-        
-        contentView.addSubview(titleLabel)
-        NSLayoutConstraint.activate([
+
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
-        ])
-        
-                
-        navigationController?.navigationBar.isHidden = true
-        
-        view.addSubview(searchBar)
-        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+
             searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            searchBar.heightAnchor.constraint(equalToConstant: 60)
-        ])
-        
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
+            searchBar.heightAnchor.constraint(equalToConstant: 60),
+
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
 
-        ])
-        
-        contentView.addSubview(noRecentSearchLabel)
-        contentView.addSubview(noRecentSearchImageView)
-        
-        NSLayoutConstraint.activate([
             noRecentSearchImageView.widthAnchor.constraint(equalToConstant: 130),
             noRecentSearchImageView.heightAnchor.constraint(equalToConstant: 130),
             noRecentSearchImageView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 70),
             noRecentSearchImageView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
-            
-            noRecentSearchLabel.topAnchor.constraint(equalTo: noRecentSearchImageView.bottomAnchor, constant: 0),
-            noRecentSearchLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
 
-        ])
-        
-        view.addSubview(searchButton)
-        NSLayoutConstraint.activate([
+            noRecentSearchLabel.topAnchor.constraint(equalTo: noRecentSearchImageView.bottomAnchor, constant: 0),
+            noRecentSearchLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32),
             searchButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
             searchButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8),
             searchButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+
+        navigationController?.navigationBar.isHidden = true
     }
-    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {

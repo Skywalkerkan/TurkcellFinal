@@ -45,6 +45,10 @@ class MeaningCell: UICollectionViewCell {
         ])
     }
     
+    func configure() {
+        
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

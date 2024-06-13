@@ -40,7 +40,6 @@ extension HomeInteractor: HomeInteractorProtocol {
         searchRepository.saveSearch(search: Search(searchString: word))
     }
     
-    
     func fetchSearchs() {
         let searchRepository = SearchRepository()
         let searchs = searchRepository.fetchSearchedWords() ?? [Search]()

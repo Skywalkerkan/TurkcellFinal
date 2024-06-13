@@ -10,14 +10,12 @@ import UIKit
 
 
 protocol SearchRepositoryProtocol {
-    
     func saveSearch(search: Search)
     func fetchSearchedWords() -> [Search]?
     func deleteSameSearch(search: Search)
 }
 
 final class SearchRepository: SearchRepositoryProtocol {
-    
     
     func deleteSameSearch(search: Search) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -33,15 +31,12 @@ final class SearchRepository: SearchRepositoryProtocol {
             for object in results ?? [] {
                 context.delete(object)
             }
-            
+        
             try context.save()
-            print("Search(s) deleted successfully")
         } catch {
             print("Delete Error: \(error.localizedDescription)")
         }
     }
-
-    
     
     func saveSearch(search: Search) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

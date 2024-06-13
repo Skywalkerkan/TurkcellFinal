@@ -23,7 +23,6 @@ final class LaunchRouter {
         let presenter = LaunchPresenter(view: view, interactor: interactor, router: router)
         
         view.presenter = presenter
-        //interactor.out
         router.viewController = view
         return view
     }

@@ -41,9 +41,6 @@ extension HomePresenter: HomePresenterProtocol {
     }
     
     var fetchedWordInfo: [WordResult] {
-       /* DispatchQueue.main.async {
-            self.interactor.saveWord(word: "hello")
-        }*/
         return self.wordResult
     }
     

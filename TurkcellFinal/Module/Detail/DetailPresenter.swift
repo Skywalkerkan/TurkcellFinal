@@ -11,11 +11,12 @@ protocol DetailPresenterProtocol {
     func viewDidload(word: String?, source: [WordResult]?)
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?)
 
+    func soundButton() -> URL?
+    
     //TOPCOLLECTİONVİEW
     func partOfSpeechCount() -> Int
     func partOfSpeech(index: Int) -> String
     func deleteClicked()
-    func didSoundButtonClicked() -> URL?
     
     var isItFiltering: Bool { get }
     
@@ -58,7 +59,7 @@ final class DetailPresenter {
 
 extension DetailPresenter: DetailPresenterProtocol {
     
-    func didSoundButtonClicked() -> URL? {
+    func soundButton() -> URL? {
         if let phonetics = sourceDetail?.first?.phonetics{
             for phonetic in phonetics {
                 
@@ -69,7 +70,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         }
         return nil
     }
-    
     
     func deleteClicked() {
         isFiltering = false
@@ -91,7 +91,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         return isFiltering
     }
    
-    
     func partOfSpeechCount() -> Int {
         if isFiltering {
             return filteredPartOfSpeech.count
@@ -110,7 +109,6 @@ extension DetailPresenter: DetailPresenterProtocol {
     
     //TableView
     func numberOfRowsInSection(section: Int) -> Int {
-        // source?.first?.meanings?[section].definitions?.count ?? 0
         if isFiltering {
             if let definitionsCount = filteredSourceDetail?.first?.meanings?[section].definitions?.count {
                 return definitionsCount
@@ -124,7 +122,6 @@ extension DetailPresenter: DetailPresenterProtocol {
                 return 0
             }
         }
-
     }
     
     func numberOfSection() -> Int {
@@ -150,20 +147,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         } else {
             return sourceDetail?.first?.meanings?[index]
         }
-        
-        /*if isFiltering{
-            if let meaning = filteredSourceDetail?.first?.meanings?[index]{
-                return meaning
-            }else{
-                return nil
-            }
-        } else {
-            if let meaning = sourceDetail?.first?.meanings?[index]{
-                return meaning
-            }else{
-                return nil
-            }
-        }*/
     }
 
     func viewDidload(word: String?, source: [WordResult]?) {
@@ -172,6 +155,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         interactor.fetchSynonms(word: word)
         self.sourceDetail = source
         
+        
         if let meanings = sourceDetail?.first?.meanings{
             for mean in meanings {
                 if let partOfSpeech = mean.partOfSpeech {
@@ -179,18 +163,14 @@ extension DetailPresenter: DetailPresenterProtocol {
                 }
             }
         }
-                
-      //  view.reloadData()
+            
     }
-
+    
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?) {
         
         if !selectedCells.contains(selectedPhrase ?? ""){
             selectedCells.append(selectedPhrase ?? "")
         }
-        
-        //Ternary
-     //   isFiltering = !selectedCells.isEmpty
         
         if !selectedCells.isEmpty {
             isFiltering = true
@@ -200,48 +180,31 @@ extension DetailPresenter: DetailPresenterProtocol {
         
         filterForWord(partOfSpeechList: selectedCells)
         
-        //TODO: İNDEXPATHLERİ FORCELAMA
-        
         for selected in selectedCells {
             if unselectedCells.contains(selected) {
-                // selected öğesini unselectedCells'den kaldır
                 unselectedCells.removeAll { $0 == selected }
             }
         }
-
-            let joinedList = selectedCells.joined(separator: ", ")
-            if isItFirstTime{
-                filteredPartOfSpeech.append(joinedList)
-                for unselectedCell in unselectedCells {
-                    filteredPartOfSpeech.append(unselectedCell)
-                }
-            }else{
-                filteredPartOfSpeech[1] = joinedList
-                for selectedCell in selectedCells {
-                    if selectedCell == selectedPhrase!{
-                        filteredPartOfSpeech.removeAll { $0 == selectedCell }
-                    }
+        
+        let joinedList = selectedCells.joined(separator: ", ")
+        if isItFirstTime{
+            filteredPartOfSpeech.append(joinedList)
+            for unselectedCell in unselectedCells {
+                filteredPartOfSpeech.append(unselectedCell)
+            }
+        }else{
+            filteredPartOfSpeech[1] = joinedList
+            for selectedCell in selectedCells {
+                if selectedCell == selectedPhrase!{
+                    filteredPartOfSpeech.removeAll { $0 == selectedCell }
                 }
             }
+        }
         
         view.reloadData()
         isItFirstTime = false
     }
-    
-   /* func filterForWord(partOfSpeechList: [String]) {
-        guard !partOfSpeechList.isEmpty, let sourceDetail = sourceDetail else {
-            return
-        }
 
-        let filteredResults = sourceDetail.map { wordResult -> WordResult in
-            var updatedWordResult = wordResult
-            updatedWordResult.meanings = wordResult.meanings?.filter { partOfSpeechList.contains($0.partOfSpeech ?? "") }
-            return updatedWordResult
-        }
-
-        filteredSourceDetail = filteredResults
-        
-    }*/
     func filterForWord(partOfSpeechList: [String]) {
             guard !partOfSpeechList.isEmpty, let sourceDetail = sourceDetail else {
                 return
@@ -286,7 +249,7 @@ extension DetailPresenter: DetailPresenterProtocol {
         interactor.fetchWord(word: synonym)
         interactor.fetchSynonms(word: synonym)
     }
-    
+
 }
 
 extension DetailPresenter: DetailInteractorOutputProtocol {
@@ -304,21 +267,20 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
     }
     
     func fetchWordOutput(_ result: Result<[WordResult], NetworkError>) {
+        view.hideLoadingView()
         switch result {
         case .success(let wordResult):
-            view.hideLoadingView()
             self.sourceDetail = wordResult
             renewData()
             view.reloadData()
         case .failure(let error):
-            view.hideLoadingView()
             isErrored = true
             view.getError(error.localizedDescription)
         }
     }
 
-    
     func fetchOutputSynonms(_ result: Result<[Synonym], NetworkError>) {
+        view.hideLoadingView()
         switch result {
         case .success(let synonyms):
             if !isErrored{
@@ -327,7 +289,7 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
             }
             isErrored = false
         case .failure(let error):
-            view.hideLoadingView()
+            print(self.synonyms)
             view.getError(error.localizedDescription)
         }
     }

@@ -17,68 +17,42 @@ protocol DetailViewControllerProtocol: AnyObject {
     func getError(_ error: String)
 }
 
-
 final class DetailViewController: BaseViewController {
     
-     private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-         scrollView.showsVerticalScrollIndicator = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
+    private let factoryView = DetailInfoFactoryView()
+    
+    private lazy var scrollView: UIScrollView = {
+        return factoryView.createScrollView()
     }()
     
-    private let stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
+    private lazy var stackView: UIStackView = {
+        return factoryView.createStackView()
     }()
     
-    private let headerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 242/255, green: 241/255, blue: 246/255, alpha: 1)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var headerView: UIView = {
+        return factoryView.createTopView()
     }()
     
-    private let wordLabel: UILabel = {
-       let label = UILabel()
-        label.text = "Home"
-        label.font = UIFont.boldSystemFont(ofSize: 28)
-        label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var headerStackView: UIStackView = {
+        return factoryView.createStackView()
     }()
     
-    private let pronounceLabel: UILabel = {
-       let label = UILabel()
-        label.text = "homesa"
-        label.font = UIFont.systemFont(ofSize: 18)
-        label.textColor = .systemGray
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var wordLabel: UILabel = {
+        return factoryView.createWordLabel()
+    }()
+    
+    private lazy var pronounceLabel: UILabel = {
+        return factoryView.createPronounceLabel()
     }()
     
     private lazy var soundButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.cornerRadius = 20
-        button.applyShadow()
-        let image = UIImage(systemName: "person.wave.2")?.withRenderingMode(.alwaysOriginal).withTintColor(.black)
-        button.setImage(image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .white
-        button.addTarget(self, action: #selector(soundButtonClicked), for: .touchUpInside)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        return button
+        return factoryView.createSoundButton(target: self, action: #selector(soundButtonClicked))
     }()
-
 
     var player: AVPlayer?
     
     @objc private func soundButtonClicked() {
-        if let audioURL = presenter.didSoundButtonClicked() {
+        if let audioURL = presenter.soundButton() {
             playAudio(from: audioURL)
         } else{
             print("yokki")
@@ -90,49 +64,24 @@ final class DetailViewController: BaseViewController {
         player?.play()
     }
     
-    private let meaningsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = .clear
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    private lazy var meaningsCollectionView: UICollectionView = {
+        return factoryView.createMeaningsCollectionView()
     }()
     
-    private let tableView: SelfSizingTableView = {
-        let tableView = SelfSizingTableView()
-        tableView.backgroundColor = .systemGray6
-        tableView.layer.cornerRadius = 20
-        tableView.sectionHeaderTopPadding = 12
-        tableView.separatorStyle = .none
-        tableView.allowsSelection = false
-        tableView.clipsToBounds = true
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
+    private lazy var tableView: SelfSizingTableView = {
+        return factoryView.createTableView()
     }()
     
-    
-    private let synonymLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .black
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-        label.text = "Synonyms"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var synonymLabel: UILabel = {
+        return factoryView.createSynonymLabel()
     }()
     
-    private let synonymCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        layout.scrollDirection = .horizontal
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .clear
-        collectionView.showsHorizontalScrollIndicator = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+    private lazy var noSynonymLabel: UILabel = {
+        return factoryView.createNoSynonymLabel()
+    }()
+    
+    private lazy var synonymCollectionView: UICollectionView = {
+        return factoryView.createSynonymCollectionView()
     }()
     
     var source: [WordResult]?
@@ -143,11 +92,46 @@ final class DetailViewController: BaseViewController {
         setupViews()
         presenter.viewDidload(word: source?.first?.word, source: source)
         
-        navigationController?.navigationBar.isHidden = false
-
-        wordLabel.text = source?.first?.word
-        pronounceLabel.text = source?.first?.phonetic
+        configureViews()
         
+    }
+    
+    private func configureViews() {
+        navigationController?.navigationBar.isHidden = false
+        self.wordLabel.text = presenter?.sourceDetail?.first?.word
+        if let pronounce = self.presenter.sourceDetail?.first?.phonetic {
+            self.pronounceLabel.text = pronounce
+        } else if let phonetics = self.presenter.sourceDetail?.first?.phonetics, phonetics.indices.contains(1) {
+            let pronunce = phonetics[1].text
+            self.pronounceLabel.text = pronunce
+        } else {
+            self.pronounceLabel.text = ""
+        }
+        if presenter.soundButton() != nil {
+            DispatchQueue.main.async {
+                let image = UIImage(systemName: "person.wave.2")?
+                    .withRenderingMode(.alwaysOriginal)
+                    .withTintColor(.black)
+                self.soundButton.setImage(image, for: .normal)
+                self.soundButton.isUserInteractionEnabled = true
+            }
+        } else {
+            DispatchQueue.main.async {
+                let image = UIImage(systemName: "person.wave.2")?
+                    .withRenderingMode(.alwaysOriginal)
+                    .withTintColor(.lightGray)
+                self.soundButton.setImage(image, for: .normal)
+                self.soundButton.isUserInteractionEnabled = false
+            }
+        }
+        
+        if presenter.allSynonyms?.count == 0 {
+            synonymLabel.isHidden = true
+            noSynonymLabel.isHidden = false
+        } else {
+            synonymLabel.isHidden = false
+            noSynonymLabel.isHidden = true
+        }
     }
     
     private func setupViews() {
@@ -166,7 +150,6 @@ final class DetailViewController: BaseViewController {
         scrollView.addSubview(stackView)
 
         NSLayoutConstraint.activate([
-
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -177,11 +160,10 @@ final class DetailViewController: BaseViewController {
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-    
         ])
         
         stackView.addArrangedSubview(headerView)
-        headerView.heightAnchor.constraint(equalToConstant: 140).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 130).isActive = true
         headerView.addSubview(wordLabel)
         headerView.addSubview(pronounceLabel)
         headerView.addSubview(soundButton)
@@ -216,7 +198,6 @@ final class DetailViewController: BaseViewController {
         stackView.addArrangedSubview(tableViewWrapper)
         stackView.setCustomSpacing(16, after: tableViewWrapper)
         
-        
         let synonymLabelWrapper = UIView()
         synonymLabelWrapper.addSubview(synonymLabel)
         NSLayoutConstraint.activate([
@@ -226,45 +207,15 @@ final class DetailViewController: BaseViewController {
             synonymLabel.bottomAnchor.constraint(equalTo: synonymLabelWrapper.bottomAnchor)
         ])
         stackView.addArrangedSubview(synonymLabelWrapper)
+        
+        view.addSubview(noSynonymLabel)
+        noSynonymLabel.topAnchor.constraint(equalTo: synonymLabelWrapper.bottomAnchor, constant: -8).isActive = true
+        noSynonymLabel.centerXAnchor.constraint(equalTo: synonymLabelWrapper.centerXAnchor).isActive = true
                 
         stackView.addArrangedSubview(synonymCollectionView)
         synonymCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         tableView.rowHeight = UITableView.automaticDimension
-    }
-
-
-}
-
-
-class SelfSizingTableView: UITableView {
-    override init(frame: CGRect, style: UITableView.Style) {
-        super.init(frame: frame, style: style)
-        commonInit()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
-    }
-
-    private func commonInit() {
-        self.isScrollEnabled = false
-    }
-
-    override var contentSize: CGSize {
-        didSet {
-            invalidateIntrinsicContentSize()
-        }
-    }
-
-    override func reloadData() {
-        super.reloadData()
-        self.invalidateIntrinsicContentSize()
-    }
-
-    override var intrinsicContentSize: CGSize {
-        return contentSize
     }
 }
 
@@ -319,7 +270,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch collectionView {
         case meaningsCollectionView:
-            //let phrase = source?.first?.meanings?[indexPath.row].partOfSpeech
             if presenter.isItFiltering && indexPath.row == 0{
                 presenter.deleteClicked()
             }else if presenter.isItFiltering && indexPath.row == 1{
@@ -331,6 +281,7 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
           
         case synonymCollectionView:
             if let synonym = presenter.allSynonyms?[indexPath.row].word {
+                print(synonym)
                 presenter.didSelectSynonym(synonym)
             }
         default:
@@ -356,22 +307,21 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.identifier, for: indexPath) as! InfoCell
         
-        cell.partOfSpeechLabel.text = "\(indexPath.row+1)"
-
-        if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions,
-           let _ = definitions[indexPath.row].example {
+        cell.partOfSpeechLabel.text = "\(indexPath.row + 1)"
+        
+        if let definitions = presenter.cellForRowAt(index: indexPath.section)?.definitions, indexPath.row < definitions.count {
             let definition = definitions[indexPath.row]
-            let index = "\(indexPath.row+1)  "
+            let index = "\(indexPath.row + 1)  "
             cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition, index: index)
-        }else{
-            if let definition = presenter.cellForRowAt(index: indexPath.section)?.definitions {
-                let index = "\(indexPath.row+1)  "
-                cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition[indexPath.row], index: index)
-            }
+        } else {
+            // Bu else bloğu normalde tetiklenmemeli, çünkü indexPath.row kontrolünü yaptık.
+            // Ancak, olası bir hata durumunda varsayılan bir yapılandırma veya hata loglaması yapılabilir.
+            print("Error: indexPath.row out of range for definitions array")
         }
-
+        
         return cell
     }
+
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 48
@@ -385,9 +335,6 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         view.addSubview(imageView)
         view.addSubview(partOfSpeechLabel)
         DetailInfoFactoryView.setupConstraints(for: view, imageView: imageView, label: partOfSpeechLabel)
-
-        view.layer.cornerRadius = 12
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         let partOfSpeech = presenter.cellForRowAt(index: section)
         partOfSpeechLabel.text = partOfSpeech?.partOfSpeech
         
@@ -438,8 +385,7 @@ extension DetailViewController: DetailViewControllerProtocol {
     
     func reloadData() {
         DispatchQueue.main.async {
-            self.wordLabel.text = self.presenter.sourceDetail?.first?.word
-            self.pronounceLabel.text = self.presenter.sourceDetail?.first?.phonetic
+            self.configureViews()
             self.tableView.reloadData()
             self.meaningsCollectionView.reloadData()
             self.synonymCollectionView.reloadData()

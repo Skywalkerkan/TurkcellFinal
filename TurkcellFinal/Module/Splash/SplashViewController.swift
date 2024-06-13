@@ -30,7 +30,6 @@ class SplashViewController: BaseViewController {
         return label
     }()
     
-    
     var presesenter: SplashPresenterProtocol!
     
     override func viewDidLoad() {
@@ -51,7 +50,6 @@ class SplashViewController: BaseViewController {
         presesenter.viewDidAppear()
 
     }
-
 }
 
 extension SplashViewController: SplashViewControllerProtocol{

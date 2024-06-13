@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Lottie
 
 protocol LaunchViewControllerProtocol: AnyObject {
     func setupCollectionView()
@@ -20,9 +21,17 @@ class LaunchViewController: UIViewController {
         layout.minimumInteritemSpacing = 0
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isPagingEnabled = true
-        collectionView.backgroundColor = .blue
+        collectionView.backgroundColor = .systemGray6
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
+    }()
+    
+    private lazy var continueButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Continue", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     var presenter: LaunchPresenter!
@@ -33,30 +42,36 @@ class LaunchViewController: UIViewController {
         setupViews()
         
         presenter.viewDidLoad()
-        
+       // presenter.navigateToHome()
     }
     
     func setupViews() {
         view.addSubview(collectionView)
+        view.addSubview(continueButton)
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            continueButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -64),
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            continueButton.widthAnchor.constraint(equalToConstant: 100),
+            continueButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 
 }
 
-extension LaunchViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension LaunchViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        presenter.launchList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchCell.identifier, for: indexPath) as! LaunchCell
-        
+        cell.configure(with: "animation1", labelText: presenter.launchList[indexPath.row])
         return cell
     }
     

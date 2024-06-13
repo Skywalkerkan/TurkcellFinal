@@ -6,19 +6,21 @@
 //
 
 import UIKit
+import Lottie
 
 class LaunchCell: UICollectionViewCell {
     
     static let identifier = "LaunchCell"
     
-    private let launchImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .red
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
+    private let launchAnimationView: LottieAnimationView = {
+        let LottieAnimation = LottieAnimationView()
+        LottieAnimation.loopMode = .loop
+        LottieAnimation.animationSpeed = 1.0
+        LottieAnimation.translatesAutoresizingMaskIntoConstraints = false
+        return LottieAnimation
     }()
     
-    private let launchLabel: UILabel = {
+    let launchLabel: UILabel = {
         let label = UILabel()
         label.text = "Öyle böylasgafsgfaldska lşaskjfşadjklfadjfkadjfkadjflkadjflkadjlfkdsajfklşdajfsdkaşfjkdalkasklgjadske"
         label.textAlignment = .center
@@ -31,26 +33,35 @@ class LaunchCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupViews()
-        
     }
     
     func setupViews() {
-        contentView.addSubview(launchImageView)
+        contentView.addSubview(launchAnimationView)
         contentView.addSubview(launchLabel)
         
         NSLayoutConstraint.activate([
-            launchImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant:  -100),
-            launchImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            launchImageView.widthAnchor.constraint(equalToConstant: 100),
-            launchImageView.heightAnchor.constraint(equalToConstant: 100),
+            launchAnimationView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant:  -100),
+            launchAnimationView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            launchAnimationView.widthAnchor.constraint(equalToConstant: 200),
+            launchAnimationView.heightAnchor.constraint(equalToConstant: 200),
 
-            launchLabel.topAnchor.constraint(equalTo: launchImageView.bottomAnchor, constant: 16),
+            launchLabel.topAnchor.constraint(equalTo: launchAnimationView.bottomAnchor, constant: 16),
             launchLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             launchLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
         ])
         
     }
+    
+    func configure(with animationName: String, labelText: String) {
+         launchLabel.text = labelText
+         
+         if let animation = LottieAnimation.named(animationName) {
+             launchAnimationView.animation = animation
+             launchAnimationView.play()
+         }
+     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

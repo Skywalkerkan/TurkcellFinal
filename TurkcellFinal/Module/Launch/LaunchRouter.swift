@@ -6,9 +6,15 @@
 //
 
 import Foundation
+import UIKit
+
+enum LaunchRoutes{
+    case home
+}
 
 protocol LaunchRouterProtocol {
-    
+    func navigate(_ route: LaunchRoutes)
+
 }
 
 final class LaunchRouter {
@@ -30,5 +36,15 @@ final class LaunchRouter {
 }
 
 extension LaunchRouter: LaunchRouterProtocol {
+
+    func navigate(_ route: LaunchRoutes) {
+        switch route{
+        case .home:
+            guard let window = viewController?.view.window else { return }
+            let homeVC = HomeRouter.createModule()
+            let navigationController = UINavigationController(rootViewController: homeVC)
+            window.rootViewController = navigationController
+        }
+    }
     
 }

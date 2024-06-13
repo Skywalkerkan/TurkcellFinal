@@ -13,6 +13,8 @@ protocol SplashPresenterProtocol{
 
 final class SplashPresenter: SplashPresenterProtocol{
     
+    var hasLaunchedBefore = false
+    
     unowned var view: SplashViewControllerProtocol!
     let router: SplashRouter!
     let interactor: SplashInteractor!
@@ -25,6 +27,7 @@ final class SplashPresenter: SplashPresenterProtocol{
     
     func viewDidAppear() {
         interactor.checkInternetConnection()
+        interactor.firstTimeLaunch()
     }
 }
 
@@ -32,9 +35,17 @@ extension SplashPresenter: SplashInteractorOutputProtocol{
     func checkInternetStatus(status: Bool) {
         if status{
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-               // self.router.navigate(.home)
-                self.router.navigate(.home)
+                if self.hasLaunchedBefore {
+                    self.router.navigate(.home)
+                } else {
+                    self.router.navigate(.launch)
+                }
             }
         }
     }
+    
+    func launchedBefore(status: Bool) {
+        hasLaunchedBefore = status
+    }
+    
 }

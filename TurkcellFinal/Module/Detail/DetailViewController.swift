@@ -55,7 +55,7 @@ final class DetailViewController: BaseViewController {
         if let audioURL = presenter.soundButton() {
             playAudio(from: audioURL)
         } else{
-            print("yokki")
+
         }
     }
     
@@ -82,6 +82,10 @@ final class DetailViewController: BaseViewController {
     
     private lazy var synonymCollectionView: UICollectionView = {
         return factoryView.createSynonymCollectionView()
+    }()
+    
+    private lazy var footerSpaceView: UIView = {
+        return factoryView.createFooterView()
     }()
     
     var source: [WordResult]?
@@ -170,7 +174,7 @@ final class DetailViewController: BaseViewController {
         headerView.addSubview(meaningsCollectionView)
         
         NSLayoutConstraint.activate([
-            wordLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 16),
+            wordLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 4),
             wordLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16),
             
             pronounceLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 8),
@@ -214,8 +218,10 @@ final class DetailViewController: BaseViewController {
                 
         stackView.addArrangedSubview(synonymCollectionView)
         synonymCollectionView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
         tableView.rowHeight = UITableView.automaticDimension
+        
+        stackView.addArrangedSubview(footerSpaceView)
+        footerSpaceView.heightAnchor.constraint(equalToConstant: 12).isActive = true
     }
 }
 
@@ -281,7 +287,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
           
         case synonymCollectionView:
             if let synonym = presenter.allSynonyms?[indexPath.row].word {
-                print(synonym)
                 presenter.didSelectSynonym(synonym)
             }
         default:
@@ -314,9 +319,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
             let index = "\(indexPath.row + 1)  "
             cell.cellPresenter = InfoCellPresenter(view: cell, definition: definition, index: index)
         } else {
-            // Bu else bloğu normalde tetiklenmemeli, çünkü indexPath.row kontrolünü yaptık.
-            // Ancak, olası bir hata durumunda varsayılan bir yapılandırma veya hata loglaması yapılabilir.
-            print("Error: indexPath.row out of range for definitions array")
+
         }
         
         return cell
@@ -357,7 +360,7 @@ extension DetailViewController: DetailViewControllerProtocol {
         DispatchQueue.main.async {
             self.hideLoading()
             let topOffset = -self.scrollView.safeAreaInsets.top
-            self.scrollView.setContentOffset(CGPoint(x: 0, y: topOffset), animated: true)
+            self.scrollView.setContentOffset(CGPoint(x: 0, y: topOffset), animated: false)
         }
     }
     

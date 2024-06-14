@@ -10,8 +10,8 @@ import Foundation
 private let networkService: WordsServiceProtocol = API()
 
 protocol DetailInteractorProtocol {
-    func fetchSynonms(word: String?)
-    func fetchWord(word: String)
+    func fetchSynonyms(word: String?, completion: @escaping () -> Void)
+    func fetchWord(word: String, completion: @escaping () -> Void)
 }
 
 
@@ -28,17 +28,19 @@ final class DetailInteractor {
 
 extension DetailInteractor: DetailInteractorProtocol {
     
-    func fetchWord(word: String) {
+    func fetchWord(word: String, completion: @escaping () -> Void) {
         networkService.fetchWord(baseUrl: .word, word: word) { [weak self] result in
             guard let self = self else { return }
             self.output?.fetchWordOutput(result)
+            completion()
         }
     }
     
-    func fetchSynonms(word: String?) {
+    func fetchSynonyms(word: String?, completion: @escaping () -> Void) {
         networkService.fetchSynonms(baseUrl: .synonyms, word: word) { [weak self] result in
             guard let self = self else { return }
             self.output?.fetchOutputSynonms(result)
+            completion()
         }
     }
 }

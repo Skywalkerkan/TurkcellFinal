@@ -19,7 +19,7 @@ class DetailInfoFactoryView {
     func createStackView() -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = 4
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }
@@ -118,6 +118,11 @@ class DetailInfoFactoryView {
            return collectionView
        }
 
+    func createFooterView() -> UIView {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }
     
     static func createHeaderView() -> UIView {
         let view = UIView()

@@ -34,14 +34,24 @@ final class DetailPresenterTests: XCTestCase {
         presenter = nil
     }
     
-   func testDidSelectSynonym() {
-       
-       XCTAssertFalse(view.isInvokedHideLoading)
-       XCTAssertFalse(view.isInvokedShowLoading)
-       presenter.didSelectSynonym("home")
-       XCTAssertTrue(view.isInvokedShowLoading)
-       XCTAssertFalse(view.isInvokedHideLoading)
-
+    func testDidSelectSynonym() {
+        XCTAssertFalse(view.isInvokedHideLoading)
+        XCTAssertFalse(view.isInvokedShowLoading)
+        
+        let expectation = self.expectation(description: "Loading should be shown and hidden correctly")
+        
+        presenter.didSelectSynonym("home")
+        XCTAssertTrue(view.isInvokedShowLoading)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            XCTAssertTrue(self.view.isInvokedShowLoading)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                XCTAssertTrue(self.view.isInvokedHideLoading)
+                expectation.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 1.0, handler: nil)
     }
     
     func testFetchSynonymOutput() {
@@ -55,22 +65,51 @@ final class DetailPresenterTests: XCTestCase {
 
     }
     
+    func testDeleteClicked() {
+        
+        let wordResult = [WordResult].response
+        presenter.sourceDetail = wordResult
+        
+        presenter.deleteClicked()
+        
+        XCTAssertFalse(presenter.isFiltering)
+        XCTAssertTrue(presenter.isItFirstTime)
+        XCTAssertTrue(presenter.selectedCells.isEmpty)
+        XCTAssertEqual(presenter.unselectedCells, ["noun", "verb", "adjective", "adverb", "noun"])
+        XCTAssertEqual(presenter.filteredPartOfSpeech, ["X"])
+    }
+    
+    func testPartOfSpeechDidSelect() {
+        let wordResult = [WordResult].response
+        presenter.sourceDetail = wordResult
+        
+        presenter.partOfSpeechDidSelect(selectedPhrase: "noun", indexPath: nil)
+        
+        XCTAssertTrue(presenter.isFiltering)
+        XCTAssertEqual(presenter.selectedCells, ["noun"])
+        XCTAssertFalse(presenter.unselectedCells.contains("noun"))
+        XCTAssertEqual(presenter.filteredPartOfSpeech, ["X", "noun"])
+    }
+
+
+    
+    func testSoundButton() {
+        let wordResult = [WordResult].response
+        presenter.sourceDetail = wordResult
+        let url = presenter.soundButton()
+        XCTAssertNotNil(url)
+        XCTAssertEqual(url?.absoluteString, "https://api.dictionaryapi.dev/media/pronunciations/en/home-us.mp3")
+    }
+    
     func testFetchWordOutput() {
-        XCTAssertFalse(view.isInvokedHideLoading)
-        XCTAssertFalse(view.isInvokedShowLoading)
         XCTAssertEqual(presenter.numberOfSection(), 0)
         let presenterSection = presenter.numberOfSection()
         XCTAssertEqual(presenter.numberOfRowsInSection(section: presenterSection), 0)
 
         presenter.fetchWordOutput(.success(.response))
-        XCTAssertTrue(view.isInvokedHideLoading)
-        XCTAssertFalse(view.isInvokedShowLoading)
         XCTAssertEqual(presenter.numberOfSection(), 5)
         XCTAssertEqual(presenter.numberOfRowsInSection(section: presenterSection), 4)
-
     }
-    
-
 }
 
 extension [Synonym] {

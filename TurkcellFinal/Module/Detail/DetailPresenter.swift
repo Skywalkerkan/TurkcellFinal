@@ -9,15 +9,14 @@ import Foundation
 
 protocol DetailPresenterProtocol {
     func viewDidload(word: String?, source: [WordResult]?)
-    func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?)
 
     func soundButton() -> URL?
     
     //TOPCOLLECTİONVİEW
     func partOfSpeechCount() -> Int
     func partOfSpeech(index: Int) -> String
+    func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?)
     func deleteClicked()
-    
     var isItFiltering: Bool { get }
     
     //TableView
@@ -33,15 +32,15 @@ protocol DetailPresenterProtocol {
 
 final class DetailPresenter {
         
-    private var filteredPartOfSpeech = ["X"]
+    var filteredPartOfSpeech = ["X"]
     
     private var synonyms = [Synonym]()
-    private var selectedCells = [String]()
-    private var unselectedCells = [String]()
-    private var isItFirstTime = true
+    var selectedCells = [String]()
+    var unselectedCells = [String]()
+    var isItFirstTime = true
     private var isErrored: Bool = false
     private var allPartOfSpeech = [Meaning]()
-    private var isFiltering = false
+    var isFiltering = false
     var sourceDetail: [WordResult]?
     private var filteredSourceDetail: [WordResult]?
 
@@ -107,7 +106,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         }
     }
     
-    //TableView
     func numberOfRowsInSection(section: Int) -> Int {
         if isFiltering {
             if let definitionsCount = filteredSourceDetail?.first?.meanings?[section].definitions?.count {
@@ -141,7 +139,6 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
     
     func cellForRowAt(index: Int) -> Meaning? {
-                
         if isFiltering {
             return filteredSourceDetail?.first?.meanings?[index]
         } else {
@@ -152,9 +149,16 @@ extension DetailPresenter: DetailPresenterProtocol {
     func viewDidload(word: String?, source: [WordResult]?) {
         view.setupTableView()
         view.setupCollectionViews()
-        interactor.fetchSynonms(word: word)
+        let dispatchGroup = DispatchGroup()
         self.sourceDetail = source
         
+        dispatchGroup.enter()
+        interactor.fetchSynonyms(word: word){
+            dispatchGroup.leave()
+        }
+        dispatchGroup.notify(queue: .main) {
+            self.view.reloadData()
+          }
         
         if let meanings = sourceDetail?.first?.meanings{
             for mean in meanings {
@@ -163,7 +167,6 @@ extension DetailPresenter: DetailPresenterProtocol {
                 }
             }
         }
-            
     }
     
     func partOfSpeechDidSelect(selectedPhrase: String?, indexPath: IndexPath?) {
@@ -246,10 +249,23 @@ extension DetailPresenter: DetailPresenterProtocol {
     
     func didSelectSynonym(_ synonym: String) {
         view.showLoadingView()
-        interactor.fetchWord(word: synonym)
-        interactor.fetchSynonms(word: synonym)
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        interactor.fetchWord(word: synonym) {
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        interactor.fetchSynonyms(word: synonym){
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.view.hideLoadingView()
+            self.view.reloadData()
+          }
     }
-
 }
 
 extension DetailPresenter: DetailInteractorOutputProtocol {
@@ -267,29 +283,20 @@ extension DetailPresenter: DetailInteractorOutputProtocol {
     }
     
     func fetchWordOutput(_ result: Result<[WordResult], NetworkError>) {
-        view.hideLoadingView()
         switch result {
         case .success(let wordResult):
             self.sourceDetail = wordResult
             renewData()
-            view.reloadData()
         case .failure(let error):
-            isErrored = true
             view.getError(error.localizedDescription)
         }
     }
 
     func fetchOutputSynonms(_ result: Result<[Synonym], NetworkError>) {
-        view.hideLoadingView()
         switch result {
         case .success(let synonyms):
-            if !isErrored{
-                self.synonyms = Array(synonyms.prefix(5))
-                view.reloadData()
-            }
-            isErrored = false
+            self.synonyms = Array(synonyms.prefix(5))
         case .failure(let error):
-            print(self.synonyms)
             view.getError(error.localizedDescription)
         }
     }

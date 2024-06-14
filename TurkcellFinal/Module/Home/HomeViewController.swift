@@ -111,6 +111,21 @@ final class HomeViewController: BaseViewController {
         presenter.searchButtonClicked(word: chosenText)
     }
     
+    
+    private lazy var recentSearchButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Recent Searches", for: .normal)
+        button.addTarget(self, action: #selector(recentSearchClicked), for: .touchUpInside)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    @objc private func recentSearchClicked(){
+        
+    }
+    
     var presenter: HomePresenterProtocol!
     
     override func viewDidLoad() {
@@ -165,6 +180,7 @@ final class HomeViewController: BaseViewController {
         view.addSubview(tableView)
         view.addSubview(searchButton)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(recentSearchButton)
         contentView.addSubview(noRecentSearchLabel)
         contentView.addSubview(noRecentSearchImageView)
 
@@ -174,15 +190,19 @@ final class HomeViewController: BaseViewController {
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
 
-            searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -4),
             searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            searchBar.heightAnchor.constraint(equalToConstant: 60),
+            searchBar.heightAnchor.constraint(equalToConstant: 50),
 
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
+            recentSearchButton.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 16),
+            recentSearchButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            recentSearchButton.heightAnchor.constraint(equalToConstant: 25),
+            
+            tableView.topAnchor.constraint(equalTo: recentSearchButton.bottomAnchor, constant: 8),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
 
@@ -225,36 +245,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomeViewController: UISearchBarDelegate {
-
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        UIView.animate(withDuration: 0.3) {
-            var frameSearchBar = self.searchBar.frame
-            var frameTableView = self.tableView.frame
-            
-            frameSearchBar.origin.y -= 30
-            self.searchBar.frame = frameSearchBar
-            frameTableView.origin.y -= 20
-            self.tableView.frame = frameTableView
-        }
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        UIView.animate(withDuration: 0.3) {
-            var frameSearchBar = self.searchBar.frame
-            var frameTableView = self.tableView.frame
-            
-            frameSearchBar.origin.y += 30
-            self.searchBar.frame = frameSearchBar
-            frameTableView.origin.y += 20
-            self.tableView.frame = frameTableView
-        }
-    }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             chosenText = searchText
     }
 
-    
 }
 
 
@@ -294,9 +289,11 @@ extension HomeViewController: HomeViewControllerProtocol {
             if self.presenter.fetchedSearches.isEmpty {
                 self.noRecentSearchLabel.isHidden = false
                 self.noRecentSearchImageView.isHidden = false
+                self.recentSearchButton.isHidden = true
             }else{
                 self.noRecentSearchLabel.isHidden = true
                 self.noRecentSearchImageView.isHidden = true
+                self.recentSearchButton.isHidden = false
             }
             self.tableView.reloadData()
         }

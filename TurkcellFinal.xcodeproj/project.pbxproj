@@ -247,6 +247,7 @@
 		DE52A80D2C11390400ADF618 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				DE9D3A802C1A047D00DA3694 /* DetailViewFactory */,
 				DE9EB2F72C13243000999FA3 /* DetailCell */,
 				DEA1BB342C1224A70025FFD6 /* DetailViewController.swift */,
 				DEA1BB362C1224B30025FFD6 /* DetailInteractor.swift */,
@@ -314,7 +315,6 @@
 		DE9EB2F72C13243000999FA3 /* DetailCell */ = {
 			isa = PBXGroup;
 			children = (
-				DE9D3A802C1A047D00DA3694 /* DetailViewFactory */,
 				DE99B3A42C1B10AB00092CCC /* Meaning */,
 				DEA587E52C17B1BF005A1D68 /* InfoCell */,
 				DE9666512C18655F009D878D /* SynonymCell */,

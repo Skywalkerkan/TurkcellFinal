@@ -82,47 +82,32 @@ class InfoCell: UITableViewCell {
     
     private func setupViews(){
                 
-      //  contentView.addSubview(partOfSpeechLabel)
         contentView.addSubview(definitionLabel)
         contentView.addSubview(stackView)
-
+        
         NSLayoutConstraint.activate([
-            /*partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            partOfSpeechLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            partOfSpeechLabel.heightAnchor.constraint(equalToConstant: 40),*/
-            
-           // partOfSpeechLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 7),
-            //partOfSpeechLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             
             definitionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             definitionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             definitionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-           // definitionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
-          /* exampleLabel.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 8),
-            exampleLabel.leadingAnchor.constraint(equalTo: definitionLabel.leadingAnchor, constant: 8),
-            exampleLabel.trailingAnchor.constraint(equalTo: definitionLabel.trailingAnchor, constant: -8),
-            exampleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)*/
             
-              stackView.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 4),
-              stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-              stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-              stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            stackView.topAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 4),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
             
         ])
-        
         
         let exampleWrapper = UIView()
         exampleWrapper.addSubview(exampleLabel)
         NSLayoutConstraint.activate([
-            exampleLabel.leadingAnchor.constraint(equalTo: exampleWrapper.leadingAnchor, constant: 8), // Sol boşluk
+            exampleLabel.leadingAnchor.constraint(equalTo: exampleWrapper.leadingAnchor, constant: 8),
             exampleLabel.trailingAnchor.constraint(equalTo: exampleWrapper.trailingAnchor, constant: -8),
             exampleLabel.topAnchor.constraint(equalTo: exampleWrapper.topAnchor),
             exampleLabel.bottomAnchor.constraint(equalTo: exampleWrapper.bottomAnchor)
         ])
         stackView.addArrangedSubview(exampleWrapper)
         
-      //  stackView.addArrangedSubview(exampleLabel)
         contentView.addSubview(exampleImageView)
         NSLayoutConstraint.activate([
             exampleImageView.topAnchor.constraint(equalTo: exampleLabel.topAnchor, constant: 4),
@@ -130,22 +115,6 @@ class InfoCell: UITableViewCell {
             exampleImageView.heightAnchor.constraint(equalToConstant: 12),
             exampleImageView.widthAnchor.constraint(equalToConstant: 12)
         ])
-        
-        
-        /*stackView.setCustomSpacing(-8, after: exampleLabel)
-        stackView.addArrangedSubview(exampleImageView)
-        exampleImageView.heightAnchor.constraint(equalToConstant: 15).isActive = true
-*/
-        //contentView.addSubview(exampleImageView)
-
-      /*  NSLayoutConstraint.activate([
-            exampleImageView.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 0),
-            exampleImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            exampleImageView.heightAnchor.constraint(equalToConstant: 15),
-            exampleImageView.widthAnchor.constraint(equalToConstant: 15),
-
-
-        ])*/
         
     }
     
@@ -172,6 +141,5 @@ extension InfoCell: InfoCellProtocol {
             exampleLabel.text = ""
         }
     }
-    
     
 }

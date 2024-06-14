@@ -15,15 +15,14 @@ protocol LaunchPresenterProtocol {
 final class LaunchPresenter {
     
     unowned var view: LaunchViewControllerProtocol
-    let interactor: LaunchInteractorProtocol
+    //let interactor: LaunchInteractorProtocol
     let router: LaunchRouterProtocol
     
     let launchList = ["Understand the meanings of words and speak fluently with the dictionary in your hand", "Find the words you want and look at their meanings, learn word types easily"]
     let animations = ["animation1", "animation2"]
     
-    init(view: LaunchViewControllerProtocol, interactor: LaunchInteractorProtocol, router: LaunchRouterProtocol) {
+    init(view: LaunchViewControllerProtocol, router: LaunchRouterProtocol) {
         self.view = view
-        self.interactor = interactor
         self.router = router
     }
     

@@ -46,9 +46,13 @@ class SynonymCell: UICollectionViewCell {
         ])
     }
     
+    func configure(synonym: String?) {
+        synonymLabel.text = synonym
+        
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }

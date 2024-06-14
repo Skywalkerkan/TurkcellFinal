@@ -251,7 +251,9 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
             return cell
         case synonymCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SynonymCell.identifier, for: indexPath) as! SynonymCell
-            cell.synonymLabel.text = presenter.allSynonyms?[indexPath.row].word
+            if let synoynm = presenter.allSynonyms?[indexPath.row].word{
+                cell.configure(synonym: synoynm)
+            }
             return cell
         default:
             break

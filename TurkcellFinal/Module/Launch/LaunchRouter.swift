@@ -24,9 +24,8 @@ final class LaunchRouter {
     static func createModule() -> LaunchViewController {
         
         let view = LaunchViewController()
-        let interactor = LaunchInteractor()
         let router = LaunchRouter()
-        let presenter = LaunchPresenter(view: view, interactor: interactor, router: router)
+        let presenter = LaunchPresenter(view: view, router: router)
         
         view.presenter = presenter
         router.viewController = view

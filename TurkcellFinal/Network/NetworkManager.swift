@@ -27,7 +27,6 @@ enum NetworkError: Error{
         }
     }
 }
-    //TODO: BUNU DÜZENLE SONRA AYAR ÇEK
 
 protocol NetworkService {
     func performRequest<T: Decodable>(
@@ -65,7 +64,6 @@ extension NetworkManager: NetworkService {
         
         task.resume()
     }
-    
     
 }
 

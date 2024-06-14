@@ -190,7 +190,7 @@ final class HomeViewController: BaseViewController {
             contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
 
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
 
             searchBar.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -4),

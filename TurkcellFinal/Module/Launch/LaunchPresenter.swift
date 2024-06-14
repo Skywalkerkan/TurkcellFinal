@@ -35,7 +35,7 @@ extension LaunchPresenter: LaunchPresenterProtocol {
     }
     
     func navigateToHome() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.async {
             self.router.navigate(.home)
         }
     }

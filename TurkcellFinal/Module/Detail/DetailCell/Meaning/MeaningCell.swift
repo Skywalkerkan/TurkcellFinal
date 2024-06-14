@@ -45,9 +45,30 @@ class MeaningCell: UICollectionViewCell {
         ])
     }
     
-    func configure() {
-        
-    }
+    func configure(with meaningText: String, isFiltering: Bool, indexPath: IndexPath) {
+           meaningLabel.text = meaningText
+           
+           if isFiltering {
+               switch indexPath.row {
+               case 0:
+                   contentView.backgroundColor = UIColor(red: 250/255, green: 80/255, blue: 80/255, alpha: 0.8)
+                   contentView.layer.borderColor = UIColor.clear.cgColor
+                   meaningLabel.textColor = .white
+               case 1:
+                   contentView.backgroundColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 0.9)
+                   contentView.layer.borderColor = UIColor.clear.cgColor
+                   meaningLabel.textColor = .white
+               default:
+                   contentView.layer.borderColor = UIColor.gray.cgColor
+                   contentView.backgroundColor = .white
+                   meaningLabel.textColor = .black
+               }
+           } else {
+               contentView.layer.borderColor = UIColor.gray.cgColor
+               contentView.backgroundColor = .white
+               meaningLabel.textColor = .black
+           }
+       }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

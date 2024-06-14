@@ -51,8 +51,6 @@ struct Phonetic: Decodable {
     }
 }
 
-
-
 struct ErrorResponse: Decodable {
     let title: String?
     let message: String?

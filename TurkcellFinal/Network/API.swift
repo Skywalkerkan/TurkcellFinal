@@ -18,15 +18,12 @@ enum BaseUrl: String {
     case synonyms = "https://api.datamuse.com/words?rel_syn="
 }
 
-
-
 final class API {
     
     static let shared: API = {
         let instance = API()
         return instance
     }()
-    
     
     var baseURL = "https://api.dictionaryapi.dev/api/v2/entries/en/"
     

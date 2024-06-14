@@ -10,13 +10,11 @@ import XCTest
 
 final class HomePresenterTests: XCTestCase {
     
-    
     var presenter: HomePresenter!
     var view: MockHomeViewController!
     var interactor: MockHomeInteractor!
     var router: MockHomeRouter!
     
-
     override func setUp() {
         super.setUp()
         

@@ -12,9 +12,7 @@ enum HomeRoutes {
 }
 
 protocol HomeRouterProtocol {
-    
     func navigate(_ navigate: HomeRoutes)
-    
 }
 
 final class HomeRouter {

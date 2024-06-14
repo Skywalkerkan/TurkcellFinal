@@ -14,13 +14,11 @@ protocol DetailInteractorProtocol {
     func fetchWord(word: String, completion: @escaping () -> Void)
 }
 
-
 protocol DetailInteractorOutputProtocol {
     func fetchOutputSynonms(_ result: Result<[Synonym], NetworkError>)
     func fetchWordOutput(_ result: Result<[WordResult], NetworkError>)
 
 }
-
 
 final class DetailInteractor {
     var output: DetailInteractorOutputProtocol?

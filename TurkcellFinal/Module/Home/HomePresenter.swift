@@ -44,7 +44,6 @@ extension HomePresenter: HomePresenterProtocol {
         return self.wordResult
     }
     
-    
     func viewDidLoad() {
         view.setupTableView()
         view.setupSearchController()
@@ -81,11 +80,9 @@ extension HomePresenter: HomeInteractorOutputProtocol {
         }
     }
     
-    
     func fetchSearchOutput(_ searchs: [Search]) {
         self.searchs = searchs
         view.reloadData()
     }
-    
     
 }

@@ -45,7 +45,7 @@ class LaunchCell: UICollectionViewCell {
             launchAnimationView.widthAnchor.constraint(equalToConstant: 200),
             launchAnimationView.heightAnchor.constraint(equalToConstant: 200),
 
-            launchLabel.topAnchor.constraint(equalTo: launchAnimationView.bottomAnchor, constant: 16),
+            launchLabel.topAnchor.constraint(equalTo: launchAnimationView.bottomAnchor, constant: -32),
             launchLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             launchLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
 
@@ -65,6 +65,5 @@ class LaunchCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }

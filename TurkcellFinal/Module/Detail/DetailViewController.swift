@@ -242,25 +242,12 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch collectionView {
         case meaningsCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeaningCell.identifier, for: indexPath) as! MeaningCell
-            if presenter.isItFiltering && indexPath.row == 0{
-                cell.contentView.backgroundColor = UIColor(red: 250/255, green: 80/255, blue: 80/255, alpha: 0.8)
-                cell.contentView.layer.borderColor = UIColor.clear.cgColor
-                cell.meaningLabel.textColor = .white
-                cell.contentView.layer.cornerRadius = 18
-            }else if presenter.isItFiltering && indexPath.row == 1{
-                cell.contentView.backgroundColor = UIColor(red: 247/255, green: 150/255, blue: 71/255, alpha: 0.9)
-                cell.contentView.layer.borderColor = UIColor.clear.cgColor
-                cell.meaningLabel.textColor = .white
-              }else{
-                  cell.contentView.layer.borderColor = UIColor.gray.cgColor
-                  cell.contentView.backgroundColor = .white
-                  cell.meaningLabel.textColor = .black
-              }
-            cell.meaningLabel.text = presenter.partOfSpeech(index: indexPath.row)
+            let meaningText = presenter.partOfSpeech(index: indexPath.row)
+            let isFiltering = presenter.isItFiltering
+            cell.configure(with: meaningText, isFiltering: isFiltering, indexPath: indexPath)
             return cell
         case synonymCollectionView:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SynonymCell.identifier, for: indexPath) as! SynonymCell
@@ -269,7 +256,6 @@ extension DetailViewController: UICollectionViewDataSource, UICollectionViewDele
         default:
             break
         }
-        
         return UICollectionViewCell()
     }
     

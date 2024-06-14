@@ -20,9 +20,7 @@ This app is a dictionary library clone. In short, it is a dictionary library app
 - Easily follow the word'' meaning and part of speech from the dictionary app thanks to Handy Dictionary.
 - The API used is https://api.dictionaryapi.dev/api/v2/entries/en/{word},  https://api.datamuse.com/words?rel_syn={word} 
   
- **Add Favorites Your Game:**
-- Enjoy your time with the games you see in your library.
-- Data is saved locally with the help of Coredata by user's adding favorite.
+
  ## Screenshots
 
 | Image 1                | Image 2                | Image 3                |

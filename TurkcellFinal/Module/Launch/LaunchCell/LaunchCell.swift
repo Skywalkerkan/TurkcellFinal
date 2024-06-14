@@ -22,7 +22,6 @@ class LaunchCell: UICollectionViewCell {
     
     let launchLabel: UILabel = {
         let label = UILabel()
-        label.text = "Öyle böylasgafsgfaldska lşaskjfşadjklfadjfkadjfkadjflkadjflkadjlfkdsajfklşdajfsdkaşfjkdalkasklgjadske"
         label.textAlignment = .center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false

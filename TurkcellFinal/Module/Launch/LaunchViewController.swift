@@ -123,7 +123,7 @@ extension LaunchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchCell.identifier, for: indexPath) as! LaunchCell
-        cell.configure(with: "animation1", labelText: presenter.launchList[indexPath.row])
+        cell.configure(with: presenter.animations[indexPath.row], labelText: presenter.launchList[indexPath.row])
         return cell
     }
     

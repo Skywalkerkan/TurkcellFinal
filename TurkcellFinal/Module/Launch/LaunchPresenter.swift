@@ -18,7 +18,8 @@ final class LaunchPresenter {
     let interactor: LaunchInteractorProtocol
     let router: LaunchRouterProtocol
     
-    let launchList = ["Understand the meanings of words and speak fluently with the dictionary in your hand", ""]
+    let launchList = ["Understand the meanings of words and speak fluently with the dictionary in your hand", "Find the words you want and look at their meanings, learn word types easily"]
+    let animations = ["animation1", "animation2"]
     
     init(view: LaunchViewControllerProtocol, interactor: LaunchInteractorProtocol, router: LaunchRouterProtocol) {
         self.view = view

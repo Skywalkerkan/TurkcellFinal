@@ -21,6 +21,7 @@
 		DE52A8062C112B8800ADF618 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8052C112B8800ADF618 /* SearchCell.swift */; };
 		DE52A8092C11373B00ADF618 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A8082C11373B00ADF618 /* ServiceManager.swift */; };
 		DE52A80C2C11376100ADF618 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE52A80B2C11376100ADF618 /* Word.swift */; };
+		DE9229E42C1CC12100C010B1 /* animation2.json in Resources */ = {isa = PBXBuildFile; fileRef = DE9229E32C1CC12100C010B1 /* animation2.json */; };
 		DE9666542C186C9C009D878D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9666532C186C9C009D878D /* StringExtension.swift */; };
 		DE99B3A32C1AF3DB00092CCC /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE99B3A22C1AF3DB00092CCC /* CustomCell.swift */; };
 		DE99B3A72C1B3A7E00092CCC /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DE99B3A62C1B3A7E00092CCC /* Lottie */; };
@@ -100,6 +101,7 @@
 		DE52A8052C112B8800ADF618 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		DE52A8082C11373B00ADF618 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		DE52A80B2C11376100ADF618 /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		DE9229E32C1CC12100C010B1 /* animation2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation2.json; sourceTree = "<group>"; };
 		DE9666532C186C9C009D878D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		DE99B3A22C1AF3DB00092CCC /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		DE99B3A82C1B4EB900092CCC /* animation1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation1.json; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		DEA1BB2E2C120BA90025FFD6 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				DE9229E32C1CC12100C010B1 /* animation2.json */,
 				DE99B3A82C1B4EB900092CCC /* animation1.json */,
 				DEA1BB2F2C120BB40025FFD6 /* LoadingShowable.swift */,
 			);
@@ -582,6 +585,7 @@
 				DEB3CFA72C08D7BB00002729 /* Assets.xcassets in Resources */,
 				DEB3CFAA2C08D7BB00002729 /* Base in Resources */,
 				DEB3CFA22C08D7B900002729 /* Base in Resources */,
+				DE9229E42C1CC12100C010B1 /* animation2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

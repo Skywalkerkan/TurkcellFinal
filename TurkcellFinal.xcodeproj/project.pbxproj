@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		DE294F5A2C0F4484004C4531 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F592C0F4484004C4531 /* LaunchViewController.swift */; };
-		DE294F5C2C0F448E004C4531 /* LaunchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F5B2C0F448E004C4531 /* LaunchInteractor.swift */; };
 		DE294F5E2C0F4886004C4531 /* LaunchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F5D2C0F4886004C4531 /* LaunchPresenter.swift */; };
 		DE294F612C0F48B8004C4531 /* LaunchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F602C0F48B8004C4531 /* LaunchRouter.swift */; };
 		DE294F642C0F49A4004C4531 /* LaunchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE294F632C0F49A4004C4531 /* LaunchCell.swift */; };
@@ -88,7 +87,6 @@
 
 /* Begin PBXFileReference section */
 		DE294F592C0F4484004C4531 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
-		DE294F5B2C0F448E004C4531 /* LaunchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchInteractor.swift; sourceTree = "<group>"; };
 		DE294F5D2C0F4886004C4531 /* LaunchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchPresenter.swift; sourceTree = "<group>"; };
 		DE294F602C0F48B8004C4531 /* LaunchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchRouter.swift; sourceTree = "<group>"; };
 		DE294F632C0F49A4004C4531 /* LaunchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCell.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 			children = (
 				DE294F622C0F498D004C4531 /* LaunchCell */,
 				DE294F592C0F4484004C4531 /* LaunchViewController.swift */,
-				DE294F5B2C0F448E004C4531 /* LaunchInteractor.swift */,
 				DE294F5D2C0F4886004C4531 /* LaunchPresenter.swift */,
 				DE294F602C0F48B8004C4531 /* LaunchRouter.swift */,
 			);
@@ -616,7 +613,6 @@
 				DEA1BB3B2C1224C60025FFD6 /* DetailRouter.swift in Sources */,
 				DE52A7FB2C111C3300ADF618 /* HomeInteractor.swift in Sources */,
 				DEB3CF9F2C08D7B900002729 /* ViewController.swift in Sources */,
-				DE294F5C2C0F448E004C4531 /* LaunchInteractor.swift in Sources */,
 				DE9EB2FD2C133AEC00999FA3 /* InfoCell.swift in Sources */,
 				DE52A7F62C111BFD00ADF618 /* HomeViewController.swift in Sources */,
 				DEA1BB332C120BED0025FFD6 /* LoadingView.swift in Sources */,

@@ -389,7 +389,6 @@
 				DEB3CFCF2C08D8DC00002729 /* Resources */,
 				DEB3CFCE2C08D8D800002729 /* App */,
 				DEB3CFA02C08D7B900002729 /* Main.storyboard */,
-				DEB3CFA62C08D7BB00002729 /* Assets.xcassets */,
 				DEB3CFA82C08D7BB00002729 /* LaunchScreen.storyboard */,
 				DEB3CFAB2C08D7BB00002729 /* Info.plist */,
 				DEB3CFA32C08D7B900002729 /* TurkcellFinal.xcdatamodeld */,
@@ -432,6 +431,7 @@
 		DEB3CFCE2C08D8D800002729 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				DEB3CFA62C08D7BB00002729 /* Assets.xcassets */,
 				DEB3CF9E2C08D7B900002729 /* ViewController.swift */,
 				DEB3CF9C2C08D7B900002729 /* SceneDelegate.swift */,
 				DEB3CF9A2C08D7B900002729 /* AppDelegate.swift */,

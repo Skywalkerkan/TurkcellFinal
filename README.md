@@ -21,15 +21,16 @@ This app is a dictionary library clone. In short, it is a dictionary library app
 - The API used is https://api.dictionaryapi.dev/api/v2/entries/en/{word},  https://api.datamuse.com/words?rel_syn={word} 
   
 
+
  ## Screenshots
 
 | Image 1                | Image 2                | Image 3                |
 |------------------------|------------------------|------------------------|
-| ![1](https://github.com/Skywalkerkan/MovieApp/assets/117943189/224979df-d2ca-46ae-b6b2-c45c6f63da78)| ![2](https://github.com/Skywalkerkan/MovieApp/assets/117943189/04ecb1cf-1c28-4bee-a366-eb7881ead5a0)| ![3](https://github.com/Skywalkerkan/MovieApp/assets/117943189/f598d9ba-a793-49cc-ae94-42eb84b2fd3d)|
+| ![1](https://github.com/user-attachments/assets/21cdcd23-4c4d-4f0b-a1bd-91ab7c2827df)| ![2](https://github.com/user-attachments/assets/fa071264-d9d8-4448-bfc1-a54e29a079c1)| ![3](https://github.com/user-attachments/assets/34df4ea0-6dd9-4b97-a6f3-1fcc7d65f804)|
 
 | Image 4                | Image 5                | Image 6                |
 |------------------------|------------------------|------------------------|
-| ![4](https://github.com/Skywalkerkan/MovieApp/assets/117943189/8a2e6353-046a-4bcf-aab6-c5fc89b8f492)| ![5](https://github.com/Skywalkerkan/MovieApp/assets/117943189/6bb73d21-21cb-4060-b37f-a57ced890050)| ![6](https://github.com/Skywalkerkan/MovieApp/assets/117943189/59827d5f-c4a2-4525-9d6f-9a1f47bb8dd8) |
+| ![4](https://github.com/user-attachments/assets/b95740b9-8fca-4195-80d4-ba83d5b2d407)| ![5](https://github.com/user-attachments/assets/bd5267be-3f57-4078-8059-d75c9414734d)| ![6](https://github.com/user-attachments/assets/ea027d10-e4ba-482e-98d0-ff72b16a9520)|
 
 
 ## Tech Stack
@@ -39,7 +40,7 @@ This app is a dictionary library clone. In short, it is a dictionary library app
 
 
 ## Architecture
-![Viper](https://github.com/Skywalkerkan/MovieApp/assets/117943189/2ddfdd15-82fb-4214-9e1b-077f9e9637b1)
+![viper](https://github.com/user-attachments/assets/8b06133d-38d0-43e2-94c1-2cd9ab1b1fb9)
 
 VIPER is an architectural pattern widely used in iOS app development to organize application modules in a logical manner and reduce dependencies between them.
 
